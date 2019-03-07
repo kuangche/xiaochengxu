@@ -1,0 +1,13 @@
+{
+  "pages":[
+    "pages/course/course",
+    "pages/publish/publish",
+    "pages/mine/mine"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#0066ff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"white"
+  }
+}

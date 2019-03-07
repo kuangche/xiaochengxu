@@ -1,0 +1,4 @@
+/**publish.wxss**/
+page{    
+  background-color: #fff;
+}

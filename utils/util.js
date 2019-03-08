@@ -31,6 +31,22 @@ function changeWidth(e, _this, canvasHeight, pageType) {
   })
 }
 
+function ajax(options){
+  var user = wx.getStorageSync('user');//登录过后，用户信息会缓存
+  if (!user) {
+    wx.redirectTo({
+      url: '/pages/login/login'
+    })
+  }else{
+    wx.request({
+      ...options,
+      url: 'https://api.vroec.com/' + options.url
+    })
+  }
+  
+}
+
+
 function login(){ 
   var that= this 
   var sucess = arguments[0] ? arguments[0] : function(){};//登录成功的回调 
@@ -110,6 +126,7 @@ function login(){
 }
 
 module.exports = {
+  ajax,
   formatTime: formatTime,
   changeWidth: changeWidth,
 }

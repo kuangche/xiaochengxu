@@ -1,11 +1,27 @@
 <!--pages/course/course.wxml-->
 <import src="../../template/nav" />
+<view class="tabCon">
+  <button class="default_btn" data-tab="left" bindtap="tabChange">
+    <view class="{{tab == 'left' ? 'current': ''}}">
+      点赞数
+      <image bindtap="starOrderChange" src="../../images/{{starOrder}}{{starType}}.png"/>
+    </view>
+  </button>
+  <button class="default_btn" data-tab="right" bindtap="tabChange">
+    <view class="{{tab == 'right' ? 'current': ''}}">
+      时间
+      <image bindtap="timeOrderChange" src="../../images/{{timeOrder}}{{timeType}}.png"/>
+    </view>
+  </button>
+</view>
+<view class="courseList" wx:for="{{courseList}}" wx:key="tiem.course_design_id">
+  {{item.course_design_summary}}
+</view>
 <view class="flex fix_nav_wp">
   <block wx:for="{{navData}}" wx:key="">
       <template is="nav" data="{{...item}}"/>
   </block>
 </view> 
-<view>课程</view>
 <navigator
     url="/pages/publish/publish"
     hover-class="navigator-hover"
@@ -28,20 +44,7 @@
   </button>
 </view>
 
-<view class="tabCon">
-  <button class="default_btn" data-tab="left" bindtap="tabChange">
-    <view class="{{tab == 'left' ? 'current': ''}}">
-      点赞数
-      <image bindtap="starOrderChange" src="../../images/{{starOrder}}{{starType}}.png"/>
-    </view>
-  </button>
-  <button class="default_btn" data-tab="right" bindtap="tabChange">
-    <view class="{{tab == 'right' ? 'current': ''}}">
-      时间
-      <image bindtap="timeOrderChange" src="../../images/{{timeOrder}}{{timeType}}.png"/>
-    </view>
-  </button>
-</view>
+
 
 <view class="operate">
   <button bindtap="toShowModal" class="default_btn btn_empty">

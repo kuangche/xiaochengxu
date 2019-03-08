@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/mine/course/mineCourse",
     "pages/course/course",
+    "pages/login/login",
+    "pages/mine/course/mineCourse",
     "pages/publish/publish",
     "pages/mine/mine",
     "pages/mine/minePage",
@@ -11,7 +12,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0066ff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "VR实验课程研发服务平台",
     "navigationBarTextStyle": "white"
   }
 }

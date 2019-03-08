@@ -7,6 +7,3 @@
     <view class="{{tab == 'right' ? 'current': ''}}">未发布</view>
   </button>
 </view>
-<view>
-dest
-</view>

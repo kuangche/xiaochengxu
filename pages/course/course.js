@@ -1,4 +1,5 @@
 //获取应用实例
+import { ajax } from '../../utils/util.js';
 const app = getApp()
 
 Page({
@@ -7,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    courseList: null,
     showModal:false,
     tab: "left",
     starOrder: "desc", // asc 升序； desc 降序
@@ -98,7 +100,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    ajax({
+        url: 'Api/CDSP/GetTestData',
+        success: (data) =>{
+          this.setData({
+            courseList: data.data
+          })
+        }
+      })
   },
 
   /**

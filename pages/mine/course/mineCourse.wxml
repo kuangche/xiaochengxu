@@ -1,0 +1,12 @@
+<!--pages/mine/course/mineCourse.wxml-->
+<view class="tabCon">
+  <button class="default_btn" data-tab="left" bindtap="tabChange">
+    <view class="{{tab == 'left' ? 'current': ''}}" >已发布</view>
+  </button>
+  <button class="default_btn" data-tab="right" bindtap="tabChange">
+    <view class="{{tab == 'right' ? 'current': ''}}">未发布</view>
+  </button>
+</view>
+<view>
+dest
+</view>

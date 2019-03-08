@@ -1,5 +1,4 @@
 /**mine.wxss**/
-/* 广告 */
-page{    
-  background:rgba(250, 240, 240, 0.8);
+/* 我的 */
+page{
 }

@@ -12,19 +12,19 @@ Page({
         name: "课程",  //文本
         current: 0,    //是否是当前页，0不是  1是
         style: 0,     //样式
-        ico: 'icon-qiugouguanli',  //不同图标
+        iconPath: "kecheng", //不同图标
         fn: 'gotoCourse'   //对应处理函数
       }, {
         name: "发布",
-        current: 0,
+        current: 1,
         style: 1,
-        ico: '',
+        iconPath: 'chuangjian',
         fn: 'gotoPublish'
       }, {
         name: "我的",
         current: 1,
         style: 0,
-        ico: 'icon-wode',
+        iconPath: "wode",
         fn: 'gotoMine'
       },
     ]

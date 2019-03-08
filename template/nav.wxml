@@ -1,15 +1,14 @@
 <template name="nav">
       <view class="nav_link" bindtap="{{fn}}">
-        <button class="defalut_btn {{current== 0 ? '' : 'on_cor'}}">
+        <button class="default_btn {{current== 0 ? '' : 'current'}}">
           <block wx:if="{{style == 0}}">
-                <icon class="iconfont {{ico}} del_ico idx_ico"></icon>
+                <image src="../../images/nav/{{iconPath}}-{{current}}.png" class="{{iconPath}}" />
                 <text class="txt">{{name}}</text>
           </block>
           <block wx:if="{{style == 1}}">
                 <view class="plus_wp">
-                  <image src='../../images/plus_ico.png' class="plus_ico" />
+                  <image src='../../images/nav/{{iconPath}}-{{current}}.png' class="{{iconPath}}" />
                 </view>
-                <text class="txt txt_fb">{{name}}</text>
           </block>
         </button> 
       </view>

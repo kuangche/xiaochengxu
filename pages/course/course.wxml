@@ -1,8 +1,80 @@
 <!--pages/course/course.wxml-->
 <import src="../../template/nav" />
 <view class="flex fix_nav_wp">
-<block wx:for="{{navData}}" wx:key="">
-    <template is="nav" data="{{...item}}"/>
-</block>
+  <block wx:for="{{navData}}" wx:key="">
+      <template is="nav" data="{{...item}}"/>
+  </block>
 </view> 
 <view>课程</view>
+<navigator
+    url="/pages/publish/publish"
+    hover-class="navigator-hover"
+  >
+    发布
+</navigator>
+<navigator
+    url="/pages/mine/mine"
+    hover-class="navigator-hover"
+  >
+    我的
+</navigator>
+
+<view class="tabCon">
+  <button class="default_btn" data-tab="left" bindtap="tabChange">
+    <view class="{{tab == 'left' ? 'current': ''}}" >已发布</view>
+  </button>
+  <button class="default_btn" data-tab="right" bindtap="tabChange">
+    <view class="{{tab == 'right' ? 'current': ''}}">未发布</view>
+  </button>
+</view>
+
+<view class="tabCon">
+  <button class="default_btn" data-tab="left" bindtap="tabChange">
+    <view class="{{tab == 'left' ? 'current': ''}}">
+      点赞数
+      <image bindtap="starOrderChange" src="../../images/{{starOrder}}{{starType}}.png"/>
+    </view>
+  </button>
+  <button class="default_btn" data-tab="right" bindtap="tabChange">
+    <view class="{{tab == 'right' ? 'current': ''}}">
+      时间
+      <image bindtap="timeOrderChange" src="../../images/{{timeOrder}}{{timeType}}.png"/>
+    </view>
+  </button>
+</view>
+
+<view class="operate">
+  <button bindtap="toShowModal" class="default_btn btn_empty">
+  显示
+  </button>
+  <button bindtap="hideModal" class="default_btn btn_full">
+  隐藏
+  </button>
+</view>
+
+<view class="operate">
+  <button open-type="share" class="default_btn btn_empty btn_big">
+  分享
+  </button>
+</view>
+<view class="operate">
+  <button open-type="share" class="default_btn btn_full btn_big">
+  分享
+  </button>
+</view>
+<view class="operate">
+  <button open-type="share" class="default_btn btn_warn btn_big">
+  分享
+  </button>
+</view>
+
+<view class="modal-mask" bindtap="hideModal" wx:if="{{showModal}}"></view>
+<view class="modal-content" wx:if="{{showModal}}">
+  <view class='contact_modal'>
+    <image src='/images/chenggong.png'></image>
+    <text class='contact_text_modal'>个人信息更新成功</text>
+  </view>
+  <view class="operate">
+    <button class='default_btn btn_full' bindtap="hideModal">好的</button>
+  </view>
+</view>

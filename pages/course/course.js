@@ -7,28 +7,53 @@ Page({
    * 页面的初始数据
    */
   data: {
-    conName: 'nav',
+    showModal:false,
+    tab: "left",
+    starOrder: "desc", // asc 升序； desc 降序
+    starType: 1, //0 为选中状态，1选中状态  
+    timeOrder: "desc",
+    timeType: 0,
     navData: [
       {
         name: "课程",  //文本
         current: 1,    //是否是当前页，0不是  1是
         style: 0,     //样式
-        ico: 'icon-qiugouguanli',  //不同图标
+        iconPath: "kecheng", //不同图标
         fn: 'gotoCourse'   //对应处理函数
       }, {
         name: "发布",
-        current: 0,
+        current: 1,
         style: 1,
-        ico: '',
+        iconPath: 'chuangjian',
         fn: 'gotoPublish'
       }, {
         name: "我的",
         current: 0,
         style: 0,
-        ico: 'icon-wode',
+        iconPath: "wode",
         fn: 'gotoMine'
       },
     ]
+  },
+  tabChange: function(e){
+    this.setData({
+      starType: e.currentTarget.dataset.tab == 'left' ? 1 : 0,
+      timeType: e.currentTarget.dataset.tab == 'right'? 1 : 0,
+      tab: e.currentTarget.dataset.tab
+    })
+  },
+  
+  starOrderChange: function () {
+    var newOrder = this.data.starOrder == 'desc' ? 'asc' : 'desc';
+    this.setData({
+      starOrder: newOrder,
+    })
+  },
+  timeOrderChange: function () {
+    var newOrder = this.data.timeOrder == 'desc' ? 'asc' : 'desc';
+    this.setData({
+      timeOrder: newOrder,
+    })
   },
   gotoCourse: function () {
     wx.redirectTo({
@@ -43,6 +68,30 @@ Page({
   gotoMine: function () {
     wx.redirectTo({
       url: '/pages/mine/mine',
+    });
+  },
+  //转发
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+
+    }
+    return {
+      title: '转发',
+      path: '/pages/index/community/topic/topic?jsonStr=' + this.data.list,
+      success: function (res) {
+        console.log('成功', res)
+      }
+    }
+  },
+  toShowModal(e) {
+    this.setData({
+      showModal: true
+    })
+  },
+
+  hideModal() {
+    this.setData({
+      showModal: false
     });
   },
   /**

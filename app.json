@@ -1,13 +1,17 @@
 {
-  "pages":[
+  "pages": [
+    "pages/mine/course/mineCourse",
     "pages/course/course",
     "pages/publish/publish",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/mine/minePage",
+    "pages/mine/courseDetail/courseDetail",
+    "pages/course/detail/detail"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0066ff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   }
 }

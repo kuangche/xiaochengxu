@@ -1,8 +1,7 @@
-/* pages/course/course.wxss */
-
+/* pages/mine/course/mineCourse.wxss */
 .courseList {
   padding: 0rpx 20rpx 180rpx;
-  margin: 108rpx 0 0;
+  margin: 108rpx 0 180rpx;
 }
 
 .courseList .list {
@@ -36,10 +35,6 @@
 }
 
 .courseList .list .info .right>text:nth-child(1) {
-  margin-left: 20rpx;
-}
-
-.courseList .list .info .right>text:nth-child(2) {
   margin: 0rpx 20rpx;
 }
 
@@ -57,48 +52,4 @@
   height: 22rpx;
   margin: 5rpx 10rpx 0 0;
   vertical-align: top;
-}
-
-.modal-mask {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: #000;
-  opacity: 0.5;
-  overflow: hidden;
-  z-index: 9000;
-  color: #fff;
-}
-
-.modal-content {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  z-index: 9500;
-  width: 600rpx;
-  overflow: hidden;
-  padding: 30rpx 0 50rpx;
-  background: #fff;
-  margin-left: -300rpx;
-  border-radius: 12rpx;
-}
-
-.modal-content .contact_modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.modal-content .contact_modal image {
-  width: 136rpx;
-  height: 136rpx;
-}
-
-.modal-content .contact_modal .contact_text_modal {
-  font-size: 30rpx;
-  color: #4a4a4a;
-  margin: 60rpx;
 }

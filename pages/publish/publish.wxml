@@ -1,7 +1,33 @@
 <import src="../../template/nav" />
-<view class="flex fix_nav_wp">
-<block wx:for="{{navData}}" wx:key="">
-    <template is="nav" data="{{...item}}"/>
-</block>
-</view> 
-<view>发布</view>
+<view class="publishCon">
+  <form>
+    <view class="section">
+      <input name="courseName" value='{{courseName}}' placeholder="请输入您的名字" bindinput='nameBlue'/>
+    </view>
+    <view class="section">
+      <textarea name="article" value='{{article}}' placeholder="请输入课程详细描述" bindinput='articleBlue'/>
+    </view>
+  </form>
+
+
+  <view class="operate">
+    <button bindtap="saveCourse" class="default_btn btn_empty">
+    保存
+    </button>
+    <button bindtap="publishCourse" class="default_btn btn_full">
+    发布
+    </button>
+  </view>
+</view>
+
+<view class="modal-mask" bindtap="hideModal" wx:if="{{showModal}}"></view>
+<view class="modal-content" wx:if="{{showModal}}">
+  <view class='contact_modal'>
+    <image src='/images/chenggong.png'></image>
+    <text class='contact_text_modal'>{{operateType}}成功!</text>
+  </view>
+  <view class="operate">
+    <button class='default_btn btn_full' bindtap="continue">继续发布</button>
+    <button class='default_btn btn_full' bindtap="toView">去查看</button>
+  </view>
+</view>

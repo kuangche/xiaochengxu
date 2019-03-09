@@ -35,7 +35,7 @@ Page({
     });
   },
   gotoPublish: function () {
-    wx.redirectTo({
+    wx.navigateTo({
       url: '/pages/publish/publish',
     });
   },

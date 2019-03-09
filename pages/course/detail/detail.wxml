@@ -1,19 +1,20 @@
 <view class="courseDetail">
   <view class="info">
-    <text>2019.2.22</text>
-    <text>哈尔滨工业大学</text>
-    <text>白君威</text>
+    <text>{{time}}</text>
+    <text>{{school}}</text>
+    <text>{{userName}}</text>
   </view>
   <view class="title">
-    微机实验基础
+    {{title}}
   </view>
   <view class="article">
     <rich-text nodes="{{html}}"></rich-text>
   </view>
 </view>
 
-<button class="star">
-  <image src="../../../images/courseDetailStar.png"/><text>234</text>
+<button class="star {{starDisabled? 'disabled': ''}}" bindtap="starAdd">
+  <image src="../../../images/courseDetailStar.png"/>
+  <text>{{starNum}}</text>
 </button>
 <button open-type="share" class="share">
   <image src="../../../images/courseDetailShare.png"/>

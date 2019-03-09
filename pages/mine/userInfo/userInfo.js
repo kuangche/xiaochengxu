@@ -5,9 +5,52 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    showModal: false,
+    formData: {
+      userNameType: true,
+      iphoneType: true,
+      schoolType: true,
+      collegeType: true
+    }
+  },
+  formSubmit(e) {
+    var currData = e.detail.value;
+    this.setData({
+      formData: {
+        userNameType: !!currData.userName,
+        iphoneType: !!currData.iphone,
+        schoolType: !!currData.school,
+        collegeType: !!currData.college,
+        ...currData
+      }
+    });
+    if (!this.data.formData.userName){
+      return false;
+    }
+    if(!this.data.formData.iphone){
+      return false;
+    }
+    if(!this.data.formData.school){
+      return false;
+    }
+    if(!this.data.formData.college){
+        return false;
+    }
+    this.setData({
+      showModal:true
+    })
+  },
+  toShowModal(e) {
+    this.setData({
+      showModal: true
+    })
   },
 
+  hideModal() {
+    this.setData({
+      showModal: false
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */

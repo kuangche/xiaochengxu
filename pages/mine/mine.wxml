@@ -27,13 +27,15 @@
     </navigator>
   </view>
   <view class="courseInfo">
-    <view class="left">
-      <image src="../../images/mineCourse.png" />
-      <text>我的课程</text>
-    </view>
-    <view class="right">
-      <image src="../../images/arrow.png" />
-    </view>
+    <navigator url="/pages/mine/mineCourse/mineCourse">
+      <view class="left">
+        <image src="../../images/mineCourse.png" />
+        <text>我的课程</text>
+      </view>
+      <view class="right">
+        <image src="../../images/arrow.png" />
+      </view>
+    </navigator>
   </view>
   <view class="starInfo">
     <view class="left">

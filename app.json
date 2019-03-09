@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/course/course",
     "pages/mine/mine",
     "pages/course/detail/detail",
-    "pages/course/course",
     "pages/login/login",
-    "pages/mine/course/mineCourse",
+    "pages/mine/mineCourse/mineCourse",
     "pages/publish/publish",
     "pages/mine/minePage",
     "pages/mine/courseDetail/courseDetail",

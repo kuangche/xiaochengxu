@@ -1,1 +1,85 @@
 /* pages/mine/userInfo/usrInfo.wxss */
+page {
+  background: #fff;
+}
+.userInfoTag{
+  background: #f0f0f0;
+  font-size: 44rpx;
+  width:380rpx;
+  height:92rpx;
+  line-height: 92rpx;
+  border-radius:0px 46px 46px 0px;
+  text-indent: 70rpx;
+  margin: 50rpx 0;
+}
+.userForm{
+  padding: 0 75rpx;
+}
+.userForm .section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  border-bottom: 1px solid #cbcbcb;
+  color: #333;
+  padding:30rpx 0 20rpx 0;
+}
+.userForm .operate{
+  margin-top: 150rpx;
+}
+.userForm .operate button{
+  width: 90%;
+}
+.userForm .section>view{
+  flex: 1
+}
+.userForm .section>input{
+  flex: 3
+}
+.userForm .section .error{
+  color: red;
+}
+
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-content {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  z-index: 9500;
+  width: 600rpx;
+  overflow: hidden;
+  padding: 30rpx 0 50rpx;
+  background: #fff;
+  margin-left: -300rpx;
+  border-radius: 12rpx;
+}
+
+.modal-content .contact_modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal-content .contact_modal image {
+  width: 136rpx;
+  height: 136rpx;
+}
+
+.modal-content .contact_modal .contact_text_modal {
+  font-size: 30rpx;
+  color: #4a4a4a;
+  margin: 60rpx;
+}

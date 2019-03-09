@@ -1,4 +1,63 @@
 /* pages/course/course.wxss */
+
+.courseList {
+  padding: 0rpx 20rpx;
+}
+
+.courseList .list {
+  background: #fff;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  padding: 46rpx 40rpx;
+}
+
+.courseList .list .title {
+  font-size: 34rpx;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+
+.courseList .list .desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 24rpx;
+}
+
+.courseList .list .info {
+  overflow: hidden;
+}
+
+.courseList .list .info .right {
+  height: 30rpx;
+  line-height: 30rpx;
+  border: 1px solid #ddd;
+  border-radius: 15rpx;
+}
+
+.courseList .list .info .right>text:nth-child(1) {
+  margin-left: 20rpx;
+}
+
+.courseList .list .info .right>text:nth-child(2) {
+  margin: 0rpx 20rpx 0 40rpx;
+}
+
+.courseList .list .info .right .star {
+  display: inline-block;
+  line-height: 30rpx;
+  height: 30rpx;
+  min-width: 100rpx;
+  background-color: rgba(118, 87, 250, 0.2);
+  border-radius: 15rpx;
+  padding: 0 20rpx;
+}
+
+.courseList .list .info .right .star image {
+  width: 18rpx;
+  height: 18rpx;
+  margin-right: 10rpx;
+}
+
 .modal-mask {
   width: 100%;
   height: 100%;
@@ -11,7 +70,6 @@
   z-index: 9000;
   color: #fff;
 }
-
 
 .modal-content {
   position: fixed;
@@ -40,6 +98,6 @@
 
 .modal-content .contact_modal .contact_text_modal {
   font-size: 30rpx;
-  color: #4A4A4A;
+  color: #4a4a4a;
   margin: 60rpx;
 }

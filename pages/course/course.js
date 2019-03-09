@@ -72,19 +72,6 @@ Page({
       url: '/pages/mine/mine',
     });
   },
-  //转发
-  onShareAppMessage: function (res) {
-    if (res.from === 'button') {
-
-    }
-    return {
-      title: '转发',
-      path: '/pages/index/community/topic/topic?jsonStr=' + this.data.list,
-      success: function (res) {
-        console.log('成功', res)
-      }
-    }
-  },
   toShowModal(e) {
     this.setData({
       showModal: true

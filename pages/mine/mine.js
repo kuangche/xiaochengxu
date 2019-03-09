@@ -1,12 +1,12 @@
 //获取应用实例
 const app = getApp()
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    userInfo: wx.getStorageSync('userInfo'),
     navData: [
       {
         name: "课程",  //文本

@@ -1,7 +1,53 @@
 <import src="../../template/nav" />
+<view class="header">
+  <view class="left">
+    <view class="userName"><text>{{userInfo.nickName}}</text></view>
+    <view class="otherInfo">
+      <view>发布课程：<text>234</text></view>
+      <view>收到赞：<text>234</text></view>
+      <view>被分享：<text>234</text></view>
+    </view>
+  </view>
+  <view class="right">
+    <image src="{{userInfo.avatarUrl}}" />
+  </view>
+</view>
+
+<view class="usrInfoList">
+  <view class="mineInfo">
+    <navigator url="/pages/mine/userInfo/userInfo">
+      <view class="left">
+        <image src="../../images/mineEdit.png" />
+        <text>个人信息</text>
+      </view>
+      <view class="right">
+        <text>完善度：65%</text>
+        <image src="../../images/arrow.png" />
+      </view>
+    </navigator>
+  </view>
+  <view class="courseInfo">
+    <view class="left">
+      <image src="../../images/mineCourse.png" />
+      <text>我的课程</text>
+    </view>
+    <view class="right">
+      <image src="../../images/arrow.png" />
+    </view>
+  </view>
+  <view class="starInfo">
+    <view class="left">
+      <image src="../../images/mineStar.png" />
+      <text>点赞记录</text>
+    </view>
+    <view class="right">
+      <image src="../../images/arrow.png" />
+    </view>
+  </view>
+</view>
+
 <view class="flex fix_nav_wp">
-<block wx:for="{{navData}}" wx:key="">
-    <template is="nav" data="{{...item}}"/>
-</block>
+  <block wx:for="{{navData}}" wx:key="">
+      <template is="nav" data="{{...item}}"/>
+  </block>
 </view> 
-<view>我的</view>

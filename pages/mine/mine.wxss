@@ -1,4 +1,90 @@
-/**mine.wxss**/
-/* 我的 */
-page{
+.header{
+  background: #fff;
+  margin-bottom: 20rpx;
+  padding: 64rpx 50rpx;
+  overflow: hidden;
+}
+.header .left{
+  width: calc(100% - 120rpx);
+}
+.header .left .userName{
+  font-size: 44rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.header .left .otherInfo{
+   display: flex;
+}
+.header .left .otherInfo>view{
+  flex: 1;
+  font-size: 22rpx;
+}
+.header .left .otherInfo>view>text{
+  color: #0066FF;
+}
+.header .right{
+  height: 100rpx;
+  width: 100rpx;
+  overflow: hidden;
+  border-radius: 50rpx;
+  border:1px solid #e8e8e8;
+}
+.header .right image{
+  height: 100rpx;
+  width: 100rpx;
+}
+
+.usrInfoList{
+  background-color: #fff;
+  overflow: hidden;
+}
+.usrInfoList>view{
+  padding: 40rpx 50rpx;
+  border-bottom:1px solid #f0f0f0;
+  overflow: hidden;
+}
+.usrInfoList .left{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30rpx;
+  line-height: 30rpx;
+}
+.usrInfoList .left image{
+  display: inline-block;
+  margin-right: 20rpx;
+}
+.usrInfoList .left text{
+  font-size: 28rpx;
+  color: #333;
+}
+.usrInfoList .mineInfo .left image{
+  width: 27rpx;
+  height: 29rpx;
+}
+.usrInfoList .courseInfo .left image{
+  width: 23rpx;
+  height: 29rpx;
+}
+.usrInfoList .starInfo .left image{
+  width: 30rpx;
+  height: 30rpx;
+}
+.usrInfoList .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30rpx;
+  line-height: 30rpx;
+}
+.usrInfoList .right text{
+  font-size: 24rpx;
+}
+.usrInfoList .right image{
+  display: inline-block;
+  margin-left: 20rpx;
+  width: 10rpx;
+  height: 19rpx;
 }

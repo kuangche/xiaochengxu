@@ -50,7 +50,7 @@ Page({
       // 获取到用户的信息了，打印到控制台上看下
       console.log("用户的信息如下：");
       console.log(e.detail.userInfo);
-      wx.setStorageSync("user", e.detail.userInfo) 
+      wx.setStorageSync("userInfo", e.detail.userInfo) 
       wx.redirectTo({
         url: '../course/course'
       })

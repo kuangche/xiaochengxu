@@ -14,14 +14,36 @@
     </view>
   </button>
 </view>
-<view class="courseList" wx:for="{{courseList}}" wx:key="tiem.course_design_id">
-  {{item.course_design_summary}}
+
+<view class="courseList">
+  <view class="list" wx:for="{{courseList}}" wx:key="tiem.course_design_id">
+    <navigator url="/pages/course/detail/detail">
+      <view class="title">微机基础实验</view>
+      <view class="desc">
+      当点击  表单中 form-type 为 submit 的 组件时，会将表单组件中的 value 值进行提交，需要在表单组件中加上 name 来作为 key....
+      </view>
+      <view class="info">
+        <text class="left time">2019.2.22</text>
+        <view class="right">
+          <text class="scholl">北京科技大学</text>
+          <text class="name">张晓风</text>
+          <view class="star">
+            <image src="../../images/courseListStar.png"/>
+            <text class="num">233</text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
 </view>
+
+
 <view class="flex fix_nav_wp">
   <block wx:for="{{navData}}" wx:key="">
       <template is="nav" data="{{...item}}"/>
   </block>
-</view> 
+</view>
+
 <navigator
     url="/pages/publish/publish"
     hover-class="navigator-hover"

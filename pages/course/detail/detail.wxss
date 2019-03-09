@@ -1,1 +1,69 @@
-/* pages/course/detail/detail.wxss */
+page {
+  background: #fff;
+}
+
+.courseDetail {
+  padding: 50rpx 66rpx;
+}
+
+.courseDetail .info {
+  margin-bottom: 20rpx;
+}
+
+.courseDetail .info>text {
+  color: #999;
+  margin-right: 20rpx;
+}
+
+.courseDetail .title {
+  font-size: 44rpx;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+.courseDetail .article {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.star {
+  width: 160rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  background: linear-gradient(90deg, rgba(70, 144, 255, 1) 0%, rgba(0, 102, 255, 1) 100%);
+  box-shadow: 0px 6rpx 12rpx rgba(0, 102, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  position: fixed;
+  bottom: 100rpx;
+  right: 180rpx;
+}
+.star image{
+  width: 42rpx;
+  height: 40rpx;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.star text{
+  font-size: 26rpx;
+}
+.share {
+  width:100rpx;
+  height:100rpx;
+  border-radius: 50rpx;
+  background:rgba(42,42,42,1);
+  box-shadow:0px 8px 20px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  position: fixed;
+  bottom: 100rpx;
+  right: 50rpx;
+}
+.share image{
+  width: 34rpx;
+  height: 36rpx;
+}

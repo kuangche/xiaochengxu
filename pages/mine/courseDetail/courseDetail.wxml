@@ -1,2 +1,29 @@
-<!--pages/mine/courseDetail/courseDetail.wxml-->
-<text>pages/mine/courseDetail/courseDetail.wxml</text>
+<view class="courseDetail">
+  <view class="info">
+    <text>{{time}}</text>
+    <text>{{school}}</text>
+    <text>{{userName}}</text>
+  </view>
+  <view class="title">
+    {{title}}
+  </view>
+  <view class="article">
+    <rich-text nodes="{{html}}"></rich-text>
+  </view>
+</view>
+<view class="operate" wx:if="{{searchData.publish == 0}}">
+  <navigator url="/pages/publish/publish?pageId=111">
+    <button class="btn_empty">编辑课程</button>
+  </navigator>
+</view>
+
+<block wx:if="{{searchData.publish == 1}}">
+  <button class="star">
+    <image src="../../../images/courseDetailStar.png"/>
+    <text>{{starNum}}</text>
+  </button>
+
+  <button open-type="share" class="share">
+    <image src="../../../images/courseDetailShare.png"/>
+  </button>
+</block>

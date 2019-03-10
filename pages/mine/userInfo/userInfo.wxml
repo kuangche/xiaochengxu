@@ -33,6 +33,6 @@
     <text class='contact_text_modal'>个人信息更新成功</text>
   </view>
   <view class="operate">
-    <button class='default_btn btn_full' bindtap="hideModal">好的</button>
+    <button class='default_btn btn_full' bindtap="back">好的</button>
   </view>
 </view>

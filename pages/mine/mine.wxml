@@ -38,13 +38,15 @@
     </navigator>
   </view>
   <view class="starInfo">
-    <view class="left">
-      <image src="../../images/mineStar.png" />
-      <text>点赞记录</text>
-    </view>
-    <view class="right">
-      <image src="../../images/arrow.png" />
-    </view>
+    <navigator url="/pages/mine/starRecord/starRecord">
+      <view class="left">
+        <image src="../../images/mineStar.png" />
+        <text>点赞记录</text>
+      </view>
+      <view class="right">
+        <image src="../../images/arrow.png" />
+      </view>
+    </navigator>
   </view>
 </view>
 

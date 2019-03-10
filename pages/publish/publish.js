@@ -8,12 +8,35 @@ Page({
    * 页面的初始数据
    */
   data: {
+    searchData: null,
     showModal:false,
     operateType: '',
     courseName: '',
-    article: ''
+    article: '',
+    nameFocus: '',
+    articleFocus: ''
   },
 
+  nameBlur(){
+    this.setData({
+      nameFocus: ''
+    })
+  },
+  nameFocus(){
+    this.setData({
+      nameFocus: 'focuse'
+    })
+  },
+  articleBlur() {
+    this.setData({
+      articleFocus: ''
+    })
+  },
+  articleFocus() {
+    this.setData({
+      articleFocus: 'focuse'
+    })
+  },
 
   nameBlue: function(e){
     this.setData({
@@ -82,6 +105,26 @@ Page({
     wx.navigateTo({
       url: "/pages/mine/mineCourse/mineCourse",
     });
+  },
+
+  getCourseDetail: function () {
+    ajax({
+      url: 'Api/CDSP/GetTestData',
+      //method: 'post',
+      success: (data) => {
+        this.setData({
+          courseName: data.courseName,
+          article: data.article
+        })
+      }
+    })
+  },
+  onLoad(opts){
+    this.setData({
+      searchData:{
+        ...opts
+      }
+    })
   }
 
 })

@@ -1,7 +1,20 @@
-/* pages/mine/course/mineCourse.wxss */
 .courseList {
-  padding: 0rpx 20rpx 180rpx;
-  margin: 108rpx 0 180rpx;
+  height: calc(100% - 108rpx);
+  position: absolute;
+  left: 20rpx;
+  right: 20rpx;
+  top: 108rpx;
+  bottom: 0rpx;
+}
+
+.courseList scroll-view{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .courseList .list {
@@ -28,7 +41,7 @@
 }
 
 .courseList .list .info .right {
-  height: 30rpx;
+  height: 32rpx;
   line-height: 30rpx;
   border: 1px solid #ddd;
   border-radius: 15rpx;

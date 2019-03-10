@@ -1,4 +1,3 @@
-// pages/course/detail/detail.js
 import {
   ajax
 } from '../../../utils/util.js';
@@ -8,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    searchData: null,
     starDisabled: false,
     showNewNum: false,
     title: '微机实验基础',
@@ -30,7 +30,7 @@ rich - text 组件内屏蔽所有结点的事件。
   //转发
   onShareAppMessage: function (res) {
     if(res.from == 'button'){
-      debugger;
+      //TODO
     }
     return {
       title: '转发',
@@ -38,7 +38,7 @@ rich - text 组件内屏蔽所有结点的事件。
     }
   },
 
-  getCourseDetail: function(){
+  getCourseDetail: function(opts){
     ajax({
       url: 'Api/CDSP/GetTestData',
       // method: 'post',
@@ -46,6 +46,7 @@ rich - text 组件内屏蔽所有结点的事件。
         ...opts
       },
       success: (data) => {
+        return;
         this.setData({
           title: data.title,
           html: data.html,
@@ -61,6 +62,7 @@ rich - text 组件内屏蔽所有结点的事件。
   //点赞
   starAdd: function(opts = {}){
     if (this.data.starDisabled)return;
+    //设置数据
     ajax({
       url: 'Api/CDSP/GetTestData',
       // method: 'post',
@@ -73,7 +75,30 @@ rich - text 组件内屏蔽所有结点的事件。
           starNum: ++this.data.starNum,
           starDisabled: true
         });
+        this.modifyStarNum();
       }
     })
+  },
+
+  //修改点赞数据
+  modifyStarNum: function(id){
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];  //上一个页面
+    var courseList = prevPage.data.courseList //取上页data里的数据也可以修
+    courseList[0].course_design_title = 'aaaaaaaaaaaaaaaaaa';
+    prevPage.setData({
+      courseList
+    })
+  },
+
+  onLoad(opts){
+    this.setData({
+      searchData: {
+        ...opts
+      }
+    });
+
+    //获取详细信息
+    this.getCourseDetail(opts)
   }
 })

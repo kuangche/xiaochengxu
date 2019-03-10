@@ -12,8 +12,8 @@ page{
   margin-bottom: 100rpx;
 }
 .publishCon input{
-  border: 1px solid #0066FF;
-  height: 68rpx;
+  border: 1px solid #ccc;
+  height: 88rpx;
   line-height: 68rpx;
   font-size: 34rpx;
   border-radius: 12rpx;
@@ -22,15 +22,21 @@ page{
   color: #333;
 }
 
-.publishCon textarea{
+.publishCon textarea,
+.publishCon .replaceCon
+{
+  width: 100%;
   border-radius: 12rpx;
   border: 1px solid #ccc;
   padding: 20rpx;
-  width: calc(100% - 40rpx);
   height: 600rpx;
   background: #F8F8F8;
   font-size: 28rpx;
 }
+.publishCon .focuse{
+  border: 1px solid #0066FF;
+}
+
 .publishCon .operate{
   display: flex;
   justify-content: center;

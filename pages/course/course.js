@@ -10,6 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoading:false,  //正在加载
+    loadingComplete: false, // 全部加载完成
     courseList: null,
     orderType: "star",
     orderBy: 'desc',
@@ -122,6 +124,20 @@ Page({
             courseList: data.data
           });
         })
+      }
+    })
+  },
+  searchScrollLower(){
+    this.setData({
+      isLoading: true
+    })
+    ajax({
+      url: 'Api/CDSP/GetTestData',
+      // method: 'post',
+      success: (data) => {
+        this.setData({
+          courseList: this.data.courseList.concat(data.data)
+        });
       }
     })
   }

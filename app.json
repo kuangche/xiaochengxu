@@ -1,14 +1,14 @@
 {
   "pages": [
     "pages/course/course",
+    "pages/publish/publish",
+    "pages/mine/courseDetail/courseDetail",
     "pages/mine/mine",
     "pages/course/detail/detail",
     "pages/login/login",
     "pages/mine/mineCourse/mineCourse",
-    "pages/publish/publish",
-    "pages/mine/minePage",
-    "pages/mine/courseDetail/courseDetail",
-    "pages/mine/userInfo/userInfo"
+    "pages/mine/userInfo/userInfo",
+    "pages/mine/starRecord/starRecord"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -28,7 +28,7 @@
     <text class='contact_text_modal'>{{operateType}}成功!</text>
   </view>
   <view class="operate">
-    <button class='default_btn btn_full' bindtap="continue">继续发布</button>
+    <button class='default_btn btn_full' bindtap="continuePub">继续发布</button>
     <button class='default_btn btn_full' bindtap="toView">去查看</button>
   </view>
 </view>

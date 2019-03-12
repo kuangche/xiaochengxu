@@ -9,10 +9,16 @@ Page({
 
   bindGetUserInfo: (e) => {
     if (e.detail.userInfo) { //用户按了允许授权按钮
-      // 获取到用户的信息了，打印到控制台上看下
-      console.log("用户的信息如下：");
-      console.log(e.detail.userInfo);
-      app.globalData.user.userInfo = e.detail.userInfo;
+      const appUserInfo = e.detail.userInfo;
+      const newData = Object.assign(app.globalData.userInfo, {
+        nickName: appUserInfo.nickName,//昵称
+        headImage: appUserInfo.avatarUrl,//头像
+        sex: appUserInfo.gender,//性别
+        country: appUserInfo.country,//国家
+        province: appUserInfo.province,//省份
+        city: appUserInfo.city//城市
+      });
+      app.globalData.userInfo = newData
       wx.redirectTo({
         url: '/pages/mine/userInfo/userInfo'
       })

@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/course/course",
+    "pages/login/login",
     "pages/publish/publish",
     "pages/mine/courseDetail/courseDetail",
     "pages/mine/mine",
     "pages/course/detail/detail",
-    "pages/login/login",
     "pages/mine/mineCourse/mineCourse",
     "pages/mine/userInfo/userInfo",
     "pages/mine/starRecord/starRecord"

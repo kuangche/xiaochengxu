@@ -38,18 +38,18 @@ Page({
     })
   },
 
-  nameBlue: function(e){
+  nameBlue(e){
     this.setData({
       courseName: e.detail.value
     })
   },
-  articleBlue: function(e){
+  articleBlue(e){
     this.setData({
       article: e.detail.value
     })
   },
 
-  saveCourse: function(){
+  saveCourse(){
       ajax({
         url: 'Api/CDSP/GetTestData',
         //method: 'post',
@@ -65,7 +65,7 @@ Page({
         }
       })
   },
-  publishCourse: function () {
+  publishCourse() {
     ajax({
       url: 'Api/CDSP/GetTestData',
       //method: 'post',
@@ -87,7 +87,7 @@ Page({
       operateType: '',
     });
   },
-  continue(){
+  continuePub(){
     this.setData({
       showModal: false,
       operateType: '',
@@ -119,12 +119,24 @@ Page({
       }
     })
   },
+
   onLoad(opts){
     this.setData({
       searchData:{
         ...opts
       }
     })
+
+    if(opts){ //编辑某个课程
+      ajax({
+        url:'',
+        method: '',
+        data:{},
+        success:(data) =>{
+
+        }
+      })
+    }
   }
 
 })

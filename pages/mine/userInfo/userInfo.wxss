@@ -15,11 +15,6 @@ page {
 .userForm{
   padding: 0 75rpx;
 }
-.userForm .getPhone{
-  background:linear-gradient(to right, #4690FF, #0066FF);
-  color:#fff;
-  font-size: 24rpx;
-}
 .userForm .section{
   display: flex;
   justify-content: center;
@@ -28,6 +23,14 @@ page {
   border-bottom: 1px solid #cbcbcb;
   color: #333;
   padding:30rpx 0 20rpx 0;
+  position: relative;
+}
+.userForm .section .getPhone{
+  background:linear-gradient(to right, #4690FF, #0066FF);
+  color:#fff;
+  font-size: 24rpx;
+  position: absolute;
+  right: 0;
 }
 .userForm .operate{
   margin-top: 150rpx;

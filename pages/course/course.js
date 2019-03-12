@@ -1,7 +1,4 @@
 //获取应用实例
-import {
-  ajax
-} from '../../utils/util.js';
 const app = getApp()
 
 Page({
@@ -75,16 +72,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    this.getCourseData({
-      pageIndex: this.data.pageIndex,
-      pageSize: this.data.pageSize,
-      sortWay: this.data.sortWay
-    });
+    if(wx.getStorageSync('finish')){
+      this.getCourseData({
+        pageIndex: this.data.pageIndex,
+        pageSize: this.data.pageSize,
+        sortWay: this.data.sortWay
+      });
+    }
   },
   
   getCourseData(opts){
-    ajax({
-      url: 'Api/CDSP/GetTestData',
+    wx.request({
+      url: '/GetCourseList',
       //url: 'Api/CDSP/GetCourse',
       // method: 'post',
       data: {
@@ -107,8 +106,8 @@ Page({
   searchScrollLower(){
     //已经加载完全部课程
     if(this.data.loadingComplete)return;
-    ajax({
-      url: 'Api/CDSP/GetTestData',
+    wx.request({
+      url: 'https://api.vroec.com/api/cdsp/GetTestData',
       // method: 'post',
       data:{
         pageIndex: this.data.pageIndex,

@@ -1,4 +1,5 @@
 import{ ajax } from '../../../utils/util.js';
+const app = getApp();
 Page({
 
   /**
@@ -42,13 +43,15 @@ Page({
     if(!this.data.formData.college){
         return false;
     }
-    this.saveUserInfo({
-      userID: null, //用户ID
-      userPhone: currData.iphone, //手机号码
-      userTrueName: currData.userName, //真实姓名
-      userSchool: currData.userSchool, //学校
-      userDepartment: currData.colleg //院系
-    })
+    app.globalData.userInfo = {
+      ...getApp().globalData.userInfo,
+      phoneNumber: currData.iphone, //手机号码
+      trueName: currData.userName, //真实姓名
+      school: currData.school, //学校
+      department: currData.college //院系
+    }
+
+    this.saveUserInfo(app.globalData.userInfo)
   },
 
   //显示弹窗
@@ -68,28 +71,29 @@ Page({
     this.setData({
       showModal: false
     });
-    wx.navigateBack({
-      delta: 1
+    wx.redirectTo({
+      url: '/pages/mine/mine'
     })
   },
 
   //保存用户信息
   saveUserInfo(opts){
-    ajax({
-      url: '/SubmitPersonalData',
+    wx.request({
+      url: 'https://api.vroec.com/api/cdsp/SaveUser',
       method: 'post',
       data: {
-        userID:null, //用户ID
-        userPhone: null, //手机号码
-        userTrueName: null, //真实姓名
-        userSchool: null, //学校
-        userDepartment: null //院系
+        ...opts
       },
       success: (data)=>{
         //TODO
         this.setData({
           showModal: true
         })
+        wx.setStorage({
+          key: 'finish',
+          data: true,
+        })
+        app.globalData.userInfo.userID = data.userID || 12;
       }
     })
   },

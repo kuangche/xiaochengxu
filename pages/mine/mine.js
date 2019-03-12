@@ -1,12 +1,11 @@
-//获取应用实例
-const app = getApp()
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: wx.getStorageSync('userInfo'),
+    userInfo:null,
     navData: [
       {
         name: "课程",  //文本
@@ -29,17 +28,20 @@ Page({
       },
     ]
   },
-  gotoCourse: function () {
+  //跳转到课程页面
+  gotoCourse() {
     wx.redirectTo({
       url: '/pages/course/course',
     });
   },
-  gotoPublish: function () {
+  //跳转到发布页面
+  gotoPublish() {
     wx.navigateTo({
       url: '/pages/publish/publish',
     });
   },
-  gotoMine: function () {
+  //跳转到个人中心页面
+  gotoMine() {
     wx.redirectTo({
       url: '/pages/mine/mine',
     });
@@ -47,56 +49,26 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-   
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    
-  },
+  onLoad(options) {
+    wx.request({
+      url:'https://api.vroec.com/api/cdsp/GetUserByID',
+      method: 'get',
+      data: {
+        userID: app.globalData.userID
+      },
+      success: (data)=>{
+        this.setData({
+          userInfo : {
+            "nickName": "冀葛sss",
+            "headImage": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJOjoK7yOWrGRgwZMoBrHTaXZ6YCTbm0yqeQmvZX2SLbN8kpV9goTibP3YcZjYJnJFIN9u4iahmGmOQ/132",
+            "sex": 1,
+            "phoneNumber": "dsf",
+            "trueName": "asd",
+            "schoment": "eeeee",
+            "userID": 12
+          }
+        })
+      }
+    })
+  }
 })

@@ -1,7 +1,7 @@
 <import src="../../template/nav" />
 <view class="header">
   <view class="left">
-    <view class="userName"><text>{{userInfo.nickName}}</text></view>
+    <view class="userName"><text>{{userInfo.trueName}}</text></view>
     <view class="otherInfo">
       <view>发布课程：<text>234</text></view>
       <view>收到赞：<text>234</text></view>
@@ -9,7 +9,7 @@
     </view>
   </view>
   <view class="right">
-    <image src="{{userInfo.avatarUrl}}" />
+    <image src="{{userInfo.headImage}}" />
   </view>
 </view>
 
@@ -21,7 +21,7 @@
         <text>个人信息</text>
       </view>
       <view class="right">
-        <text>完善度：65%</text>
+        <text>完善度：100%</text>
         <image src="../../images/arrow.png" />
       </view>
     </navigator>

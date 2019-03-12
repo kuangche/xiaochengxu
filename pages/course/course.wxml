@@ -2,16 +2,16 @@
 <import src="../../template/nav" />
 
 <view class="tabCon">
-  <button class="default_btn" data-tab="left" bindtap="tabChange">
-    <view class="{{tab == 'left' ? 'current': ''}}">
+  <button class="default_btn" data-sort-way= '1' bindtap="tabChange">
+    <view class="{{sortWay == '1' ? 'current': ''}}">
       点赞数
-      <image src="../../images/{{starOrder}}{{starType}}.png"/>
+      <image src="../../images/desc{{sortWay == '1' ? '1': '0'}}.png"/>
     </view>
   </button>
-  <button class="default_btn" data-tab="right" bindtap="tabChange">
-    <view class="{{tab == 'right' ? 'current': ''}}">
+  <button class="default_btn" data-sort-way= '2' bindtap="tabChange">
+    <view class="{{sortWay == '2' ? 'current': ''}}">
       时间
-      <image src="../../images/{{timeOrder}}{{timeType}}.png"/>
+      <image src="../../images/desc{{sortWay == '2' ? '1': '0'}}.png"/>
     </view>
   </button>
 </view>
@@ -36,9 +36,9 @@
           </view>
         </view>
       </navigator>
-    </view>
-    <view class="loading" hidden="{{!isLoading}}">正在载入更多...</view>  
-    <view class="loading complete" hidden="{{!loadingComplete}}">已加载全部</view>
+    </view> 
+    <view class="loading complete" wx:if="{{loadingComplete}}">已加载全部</view>
+    <view class="loading" wx:else>正在载入更多...</view> 
   </scroll-view>
 </view>
 

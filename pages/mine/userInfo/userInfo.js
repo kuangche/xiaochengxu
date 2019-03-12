@@ -1,4 +1,4 @@
-// pages/mine/userInfo/usrInfo.js
+import{ ajax } from '../../../utils/util.js';
 Page({
 
   /**
@@ -10,9 +10,15 @@ Page({
       userNameType: true,
       iphoneType: true,
       schoolType: true,
-      collegeType: true
+      collegeType: true,
+      userName: '',
+      iphone: '',
+      school: '',
+      college: '',
     }
   },
+
+  //提交表单
   formSubmit(e) {
     var currData = e.detail.value;
     this.setData({
@@ -36,21 +42,28 @@ Page({
     if(!this.data.formData.college){
         return false;
     }
-    this.setData({
-      showModal:true
+    this.saveUserInfo({
+      userID: null, //用户ID
+      userPhone: currData.iphone, //手机号码
+      userTrueName: currData.userName, //真实姓名
+      userSchool: currData.userSchool, //学校
+      userDepartment: currData.colleg //院系
     })
   },
-  toShowModal(e) {
+
+  //显示弹窗
+  toShowModal() {
     this.setData({
       showModal: true
     })
   },
-
+  //隐藏弹窗
   hideModal() {
     this.setData({
       showModal: false
     });
   },
+  //保存用户信息后返回上一页
   back(){
     this.setData({
       showModal: false
@@ -59,59 +72,50 @@ Page({
       delta: 1
     })
   },
+
+  //保存用户信息
+  saveUserInfo(opts){
+    ajax({
+      url: '/SubmitPersonalData',
+      method: 'post',
+      data: {
+        userID:null, //用户ID
+        userPhone: null, //手机号码
+        userTrueName: null, //真实姓名
+        userSchool: null, //学校
+        userDepartment: null //院系
+      },
+      success: (data)=>{
+        //TODO
+        this.setData({
+          showModal: true
+        })
+      }
+    })
+  },
+
+  //获取手机号码
+  getPhoneNumber(e) {
+    ajax({
+      url: '/getPhone',
+      method: 'post',
+      data:{
+        iv: e.detail.iv,
+        encryptedData: e.detail.encryptedData
+      },
+      success: (data)=>{
+        this.setData({
+          iphone: data.iphone
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  onLoad(options) {
 
   }
+
+
 })

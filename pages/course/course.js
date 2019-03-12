@@ -10,18 +10,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isLoading:false,  //正在加载
+    courseList: [], //数据列表
+
+    pageIndex: 1, //默认显示第一页
+    pageSize: 20, //默认每页20条数据
+    sortWay: 1, // 1 按点赞数降序 2 按时间降序
     loadingComplete: false, // 全部加载完成
-    courseList: null,
-    orderType: "star",
-    orderBy: 'desc',
 
-    tab: "left",
-    starOrder: "desc", // asc 升序； desc 降序
-    starType: 1, //0 为选中状态，1选中状态  
-    timeOrder: "desc",
-    timeType: 0,
-
+    //导航数据
     navData: [{
       name: "课程", //文本
       current: 1, //是否是当前页，0不是  1是
@@ -40,77 +36,56 @@ Page({
       style: 0,
       iconPath: "wode",
       fn: 'gotoMine'
-    }, ]
+    }]
   },
 
-  tabChange: function(e) {
-    var currTab = e.currentTarget.dataset.tab;
-    if(this.data.starType == 1 && currTab == 'left'){
-      if (this.data.starOrder == 'desc'){
-        this.setData({
-          starOrder: 'asc'
-        })
-      }else{
-        this.setData({
-          starOrder: 'desc'
-        })
-      }
-    }
-    if (this.data.timeType == 1 && currTab == 'right') {
-      if (this.data.timeOrder == 'desc') {
-        this.setData({
-          timeOrder: 'asc'
-        })
-      } else {
-        this.setData({
-          timeOrder: 'desc'
-        })
-      }
-    }
-
-    this.setData({
-      starType: currTab == 'left' ? 1 : 0,
-      timeType: currTab == 'right' ? 1 : 0,
-      tab: currTab,
-      orderType: currTab == 'left' ? "star" : "time",
-      orderBy: currTab == 'left' ? this.data.starOrder : this.data.timeOrder
-    })
-
-    //请求课程数据
-    this.getCourseData({
-      orderType: this.data.orderType,
-      orderBy: this.data.orderBy
-    });
-  },
-
-  gotoCourse: function() {
+  //跳转到课程页面
+  gotoCourse() {
     wx.redirectTo({
       url: '/pages/course/course',
     });
   },
-  gotoPublish: function() {
+  //跳转到发布页面
+  gotoPublish() {
     wx.navigateTo({
       url: '/pages/publish/publish',
     });
   },
-  gotoMine: function() {
+  //跳转到个人中心页面
+  gotoMine() {
     wx.redirectTo({
       url: '/pages/mine/mine',
+    });
+  },
+
+  //切换tab 点赞数、时间
+  tabChange(e) {
+    this.setData({
+      sortWay: e.currentTarget.dataset.sortWay
+    });
+
+    //请求课程数据
+    this.getCourseData({
+      orderType: this.data.orderType,
+      orderBy: this.data.orderBy,
+      loadingComplete: false
     });
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad() {
     this.getCourseData({
-      orderType: this.data.orderType,
-      orderBy: this.data.orderBy
+      pageIndex: this.data.pageIndex,
+      pageSize: this.data.pageSize,
+      sortWay: this.data.sortWay
     });
   },
   
   getCourseData(opts){
     ajax({
       url: 'Api/CDSP/GetTestData',
+      //url: 'Api/CDSP/GetCourse',
       // method: 'post',
       data: {
         ...opts
@@ -127,13 +102,19 @@ Page({
       }
     })
   },
+
+  //页面滑动到底部触发该事件
   searchScrollLower(){
-    this.setData({
-      isLoading: true
-    })
+    //已经加载完全部课程
+    if(this.data.loadingComplete)return;
     ajax({
       url: 'Api/CDSP/GetTestData',
       // method: 'post',
+      data:{
+        pageIndex: this.data.pageIndex,
+        pageSize: this.data.pageSize,
+        sortWay: this.data.sortWay
+      },
       success: (data) => {
         this.setData({
           courseList: this.data.courseList.concat(data.data)

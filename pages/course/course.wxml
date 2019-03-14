@@ -19,26 +19,26 @@
 <view class="courseList">
   <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower">
     <view class="list" wx:for="{{courseList}}" wx:key="item.course_design_id">
-      <navigator url="/pages/course/detail/detail?name='jige'&age=18">
-        <view class="title">{{index}}--微机基础实验--{{item.course_design_title}}</view>
+      <navigator url="/pages/course/detail/detail?listIndex={{index}}&courseID={{item.course_id || '5'}}&school={{item.user_school}}&userID={{item.user_id}}&userName={{item.user_true_name}}">
+        <view class="title">{{item.course_title}}</view>
         <view class="desc">
-        当点击  表单中 form-type 为 submit 的 组件时，会将表单组件中的 value 值进行提交，需要在表单组件中加上 name 来作为 key....
+        {{item.course_summary}}....
         </view>
         <view class="info">
-          <text class="left time">2019.2.22</text>
+          <text class="left time">{{item.course_release_time}}</text>
           <view class="right">
-            <text class="scholl">北京科技大学</text>
-            <text class="name">张晓风</text>
+            <text class="scholl">{{item.user_school}}</text>
+            <text class="name">{{item.user_true_name}}</text>
             <view class="star">
               <image src="../../images/courseListStar.png"/>
-              <text class="num">233</text>
+              <text class="num">{{item.course_praise_num}}</text>
             </view>
           </view>
         </view>
       </navigator>
     </view> 
     <view class="loading complete" wx:if="{{loadingComplete}}">已加载全部</view>
-    <view class="loading" wx:else>正在载入更多...</view> 
+    <view class="loading" wx:if="{{isLoading}}">正在载入...</view> 
   </scroll-view>
 </view>
 

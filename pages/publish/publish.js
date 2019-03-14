@@ -1,5 +1,4 @@
 //获取应用实例
-import { ajax } from '../../utils/util.js'
 const app = getApp()
 
 Page({
@@ -8,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    searchData: null,
-    showModal:false,
+    courseID: null,
+    showModal: false,
     operateType: '',
     courseName: '',
     article: '',
@@ -50,28 +49,34 @@ Page({
   },
 
   saveCourse(){
-      ajax({
-        url: 'Api/CDSP/GetTestData',
-        //method: 'post',
-        data:{
-          courseName: this.data.courseName,
-          article: this.data.article
-        },
-        success: ()=> {
-          this.setData({
-            operateType: '保存',
-            showModal: true
-          })
-        }
-      })
+    wx.request({
+      url: 'https://api.vroec.com/api/cdsp/SaveCourse',
+      method: 'post',
+      data:{
+        course_id: this.data.searchData.courseID || 0,
+        user_id: getApp().globalData.userInfo.user_id,
+        course_title: this.data.courseName,
+        course_summary: this.data.article,
+        course_is_release: 0 //是否发布（0，未发布 1，已发布） 如果是直接发布就给1
+      },
+      success: ()=> {
+        this.setData({
+          operateType: '保存',
+          showModal: true
+        })
+      }
+    })
   },
   publishCourse() {
-    ajax({
-      url: 'Api/CDSP/GetTestData',
-      //method: 'post',
+    wx.request({
+      url: 'https://api.vroec.com/api/cdsp/SaveCourse',
+      method: 'post',
       data: {
-        courseName: this.data.courseName,
-        article: this.data.article
+        course_id: this.data.searchData.courseID || 0,
+        user_id: getApp().globalData.userInfo.user_id,
+        course_title: this.data.courseName,
+        course_summary: this.data.article,
+        course_is_release: 1 //是否发布（0，未发布 1，已发布） 如果是直接发布就给1
       },
       success: ()=> {
         this.setData({
@@ -107,14 +112,17 @@ Page({
     });
   },
 
-  getCourseDetail: function () {
-    ajax({
-      url: 'Api/CDSP/GetTestData',
-      //method: 'post',
+  getCourseDetail: function (courseID) {
+    wx.request({
+      url: 'https://api.vroec.com/api/cdsp/GetCourseByID',
+      method: 'get',
+      data:{
+        courseID
+      },
       success: (data) => {
         this.setData({
-          courseName: data.courseName,
-          article: data.article
+          courseName: data.data.course_title,
+          article: data.data.course_summary
         })
       }
     })
@@ -123,19 +131,11 @@ Page({
   onLoad(opts){
     this.setData({
       searchData:{
-        ...opts
+        courseID: opts.courseID
       }
     })
-
-    if(opts){ //编辑某个课程
-      ajax({
-        url:'',
-        method: '',
-        data:{},
-        success:(data) =>{
-
-        }
-      })
+    if (opts.courseID){ //编辑某个课程
+      this.getCourseDetail(opts.courseID)
     }
   }
 

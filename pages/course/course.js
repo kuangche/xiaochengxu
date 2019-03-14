@@ -13,6 +13,7 @@ Page({
     pageSize: 20, //默认每页20条数据
     sortWay: 1, // 1 按点赞数降序 2 按时间降序
     loadingComplete: false, // 全部加载完成
+    isLoading:false,
 
     //导航数据
     navData: [{
@@ -58,14 +59,16 @@ Page({
   //切换tab 点赞数、时间
   tabChange(e) {
     this.setData({
-      sortWay: e.currentTarget.dataset.sortWay
+      sortWay: e.currentTarget.dataset.sortWay,
+      pageIndex: 1,
+      pageSize: this.data.pageSize,
     });
 
     //请求课程数据
     this.getCourseData({
-      orderType: this.data.orderType,
-      orderBy: this.data.orderBy,
-      loadingComplete: false
+      pageIndex: 1,
+      pageSize: this.data.pageSize,
+      sortWay: this.data.sortWay
     });
   },
   /**
@@ -83,9 +86,8 @@ Page({
   
   getCourseData(opts){
     wx.request({
-      url: '/GetCourseList',
-      //url: 'Api/CDSP/GetCourse',
-      // method: 'post',
+      url: 'https://api.vroec.com/api/cdsp/GetCourseList',
+      method: 'get',
       data: {
         ...opts
       },
@@ -93,9 +95,13 @@ Page({
         this.setData({
           courseList: null
         });
+
+        const TotalNum = data.data.TotalNum;
+        const courseList = data.data.Datas;
         setTimeout(()=>{
           this.setData({
-            courseList: data.data
+            courseList: courseList,
+            loadingComplete: TotalNum == courseList.length
           });
         })
       }
@@ -106,9 +112,12 @@ Page({
   searchScrollLower(){
     //已经加载完全部课程
     if(this.data.loadingComplete)return;
+    this.setData({
+      isLoading: true
+    })
     wx.request({
-      url: 'https://api.vroec.com/api/cdsp/GetTestData',
-      // method: 'post',
+      url: 'https://api.vroec.com/api/cdsp/GetCourseList',
+      method: 'post',
       data:{
         pageIndex: this.data.pageIndex,
         pageSize: this.data.pageSize,
@@ -116,7 +125,8 @@ Page({
       },
       success: (data) => {
         this.setData({
-          courseList: this.data.courseList.concat(data.data)
+          courseList: this.data.courseList.concat(data.data),
+          isLoading:false
         });
       }
     })

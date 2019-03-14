@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo:null,
+    userInfo: null,
     navData: [
       {
         name: "课程",  //文本
@@ -54,20 +54,17 @@ Page({
       url:'https://api.vroec.com/api/cdsp/GetUserByID',
       method: 'get',
       data: {
-        userID: app.globalData.userID
+        userID: getApp().globalData.userInfo.user_id
       },
       success: (data)=>{
+        const newData = data.data;
         this.setData({
-          userInfo : {
-            "nickName": "冀葛sss",
-            "headImage": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJOjoK7yOWrGRgwZMoBrHTaXZ6YCTbm0yqeQmvZX2SLbN8kpV9goTibP3YcZjYJnJFIN9u4iahmGmOQ/132",
-            "sex": 1,
-            "phoneNumber": "dsf",
-            "trueName": "asd",
-            "schoment": "eeeee",
-            "userID": 12
-          }
+          userInfo : data.data
         })
+        getApp().globalData.userInfo = {
+          ...getApp().globalData.userInfo,
+          ...data.data
+        }
       }
     })
   }

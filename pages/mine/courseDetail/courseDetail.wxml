@@ -11,13 +11,14 @@
     <rich-text nodes="{{html}}"></rich-text>
   </view>
 </view>
-<view class="operate" wx:if="{{searchData.publish == 0}}">
-  <navigator url="/pages/publish/publish?pageId=111">
+<view class="operate" wx:if="{{searchData.releaseState == 0}}">
+  <navigator url="/pages/publish/publish?courseID={{searchData.courseID}}">
     <button class="btn_empty">编辑课程</button>
   </navigator>
+  <button class="btn_full" bindtap='publish'>发布课程</button>
 </view>
 
-<block wx:if="{{searchData.publish == 1}}">
+<block wx:if="{{searchData.releaseState == 1}}">
   <button class="star">
     <image src="../../../images/courseDetailStar.png"/>
     <text>{{starNum}}</text>
@@ -27,3 +28,14 @@
     <image src="../../../images/courseDetailShare.png"/>
   </button>
 </block>
+
+<view class="modal-mask" bindtap="hideModal" wx:if="{{showModal}}"></view>
+<view class="modal-content" wx:if="{{showModal}}">
+  <view class='contact_modal'>
+    <image src='/images/chenggong.png'></image>
+    <text class='contact_text_modal'>发布成功!</text>
+  </view>
+  <view class="operate">
+    <button class='default_btn btn_full' bindtap="toView">去查看</button>
+  </view>
+</view>

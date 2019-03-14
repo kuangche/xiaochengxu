@@ -6,23 +6,17 @@ App({
       success: (res) => {
         if (res.code) {
           //TODO  根据用户code 获取openID 此时根据openID 判断是否已经完成注册，完成注册以后不需要跳转到授权页面；
+          this.globalData.code = res.code;
           const openID = wx.getStorageSync('openID');
-          const finish = wx.getStorageSync('finish');
-          if(finish){
-            wx.redirectTo({
-              url: '/pages/course/course'
+          if (openID) {
+            this.checkRegister(openID)
+          } else {
+            this.getOpenID({
+              code: res.code,
+              callBack: (openID) => {
+                this.checkRegister(openID)
+              }
             })
-          }else{
-            if (openID) {
-              this.checkRegister(openID)
-            } else {
-              this.getOpenID({
-                code: res.code,
-                callBack: (openID) => {
-                  this.checkRegister(openID)
-                }
-              })
-            }
           }
           
         } else {
@@ -44,7 +38,8 @@ App({
         const userData = data.data;
         if (userData){
           this.globalData.userInfo = userData;
-          //默认进入首页（课程页面是首页）
+          wx.setStorageSync('finish', 'ture');
+          //此时非首次登陆系统，或者可能删掉小程序后亦或者清除缓存后 再次进入
           wx.redirectTo({
             url: '/pages/course/course'
           })
@@ -67,7 +62,7 @@ App({
       },
       success: (data) => {
         const openID = data.data;
-        wx.setStorageSync('openId', openID);
+        wx.setStorageSync('openID', openID);
         this.globalData.userInfo.openID = openID
         opts.callBack(openID);
       }
@@ -75,6 +70,7 @@ App({
   },
   
   globalData: {
+    code:'',
     userInfo: {
       openID: '',//微信小程序用户唯一识别
       userID: 0,//用户内置ID （如果是注册，默认为0）

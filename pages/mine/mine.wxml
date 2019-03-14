@@ -1,21 +1,20 @@
 <import src="../../template/nav" />
 <view class="header">
   <view class="left">
-    <view class="userName"><text>{{userInfo.trueName}}</text></view>
+    <view class="userName"><text>{{userInfo.user_true_name}}</text></view>
     <view class="otherInfo">
-      <view>发布课程：<text>234</text></view>
-      <view>收到赞：<text>234</text></view>
-      <view>被分享：<text>234</text></view>
+      <view>发布课程：<text>{{userInfo.user_release_total}}</text></view>
+      <view>收到赞：<text>{{userInfo.user_praise_total}}</text></view>
     </view>
   </view>
   <view class="right">
-    <image src="{{userInfo.headImage}}" />
+    <image src="{{userInfo.user_head_image}}" />
   </view>
 </view>
 
 <view class="usrInfoList">
   <view class="mineInfo">
-    <navigator url="/pages/mine/userInfo/userInfo">
+    <navigator url="/pages/mine/userInfo/userInfo?editor=1">
       <view class="left">
         <image src="../../images/mineEdit.png" />
         <text>个人信息</text>

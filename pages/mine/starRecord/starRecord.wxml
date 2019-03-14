@@ -17,5 +17,7 @@
         </view>
       </navigator>
     </view>
+    <view class="loading complete" wx:if="{{loadingComplete}}">已加载全部</view>
+    <view class="loading" wx:if="{{isLoading}}">正在载入...</view> 
   </scroll-view>
 </view>

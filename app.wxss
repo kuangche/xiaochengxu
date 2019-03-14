@@ -1,39 +1,213 @@
-view,input,textarea,image,text,block{ box-sizing: border-box;}
-page{background-color:#F0F0F0;font-size:24rpx;color:#999; height: 100%;}
-.flex{display:-webkit-flex;display: flex;width:100%;}
-.left{float: left;}
-.right{float: right;}
-.navigator-hover {background-color:rgba(0, 0, 0, 0);opacity:0.7;}
+view, input, textarea, image, text, block {
+  box-sizing: border-box;
+}
 
+page {
+  background-color: #f0f0f0;
+  font-size: 24rpx;
+  color: #999;
+  height: 100%;
+}
+
+.flex {
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.navigator-hover {
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0.7;
+}
 
 /*  隐藏滑块  */
-::-webkit-scrollbar{width: 0; height: 0; color: transparent;}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
 /* 清楚按钮的默认样式  */
-.default_btn{background: transparent;border:none;overflow: visible;padding-left:0;padding-right:0;margin-left:0;margin-right:0;border-radius:0;}
-.default_btn:after{display: none;}
-.btn_full{box-shadow:0rpx 6rpx 12rpx rgba(0,102,255,0.2); font-size: 32rpx; border-radius: 40rpx; display: inline-block; text-align: center; height: 80rpx; line-height: 80rpx; padding: 0 94rpx; background: linear-gradient(to right, #4690FF, #0066FF); color: #fff;}
-.btn_empty{box-shadow:0rpx 6rpx 12rpx rgba(0,102,255,0.2); font-size: 32rpx; border-radius: 40rpx; display: inline-block; text-align: center; height: 80rpx; line-height: 80rpx; padding: 0 94rpx; color: #0065FF; border: 1px solid #0065FF;}
-.btn_warn{box-shadow:0rpx 6rpx 12rpx rgba(0,102,255,0.2); font-size: 32rpx; border-radius: 40rpx; display: inline-block; text-align: center; height: 80rpx; line-height: 80rpx; padding: 0 94rpx; color: #fff; background-color: #FE6C63;}
-.btn_big{ width: 60%;}
+
+.default_btn {
+  background: transparent;
+  border: none;
+  overflow: visible;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
+}
+
+.default_btn:after {
+  display: none;
+}
+
+.btn_full {
+  box-shadow: 0rpx 6rpx 12rpx rgba(0, 102, 255, 0.2);
+  font-size: 32rpx;
+  border-radius: 40rpx;
+  display: inline-block;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 94rpx;
+  background: linear-gradient(to right, #4690ff, #06f);
+  color: #fff;
+}
+
+.btn_empty {
+  box-shadow: 0rpx 6rpx 12rpx rgba(0, 102, 255, 0.2);
+  font-size: 32rpx;
+  border-radius: 40rpx;
+  display: inline-block;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 94rpx;
+  color: #0065ff;
+  border: 1px solid #0065ff;
+}
+
+.btn_warn {
+  box-shadow: 0rpx 6rpx 12rpx rgba(0, 102, 255, 0.2);
+  font-size: 32rpx;
+  border-radius: 40rpx;
+  display: inline-block;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 94rpx;
+  color: #fff;
+  background-color: #fe6c63;
+}
+
+.btn_big {
+  width: 60%;
+}
+
 /*  按钮组居中显示  */
-.operate{ display: flex; justify-content: center; padding: 0 10%;}
+
+.operate {
+  display: flex;
+  justify-content: center;
+  padding: 0 10%;
+}
 
 /*  底部悬浮导航  */
-.fix_nav_wp{height:98rpx;position: fixed;left:0;bottom:0;background:#fff;border-top:1rpx solid #ddd;z-index: 10}
-.fix_nav_wp .nav_link{flex:1; padding:10rpx 0;}
-.fix_nav_wp .nav_link button{display: flex;justify-content:space-between;align-items: center;flex-direction: column;padding:0;font-size:24rpx;color:#999;position: relative;}
 
-.fix_nav_wp .nav_link button image.kecheng{width:48rpx;height:46rpx;}
-.fix_nav_wp .nav_link button image.wode{width:48rpx;height:48rpx;}
-.fix_nav_wp .nav_link button .plus_wp{width:129rpx;height:129rpx;margin-top: -70rpx; background-color: #0065FF; border-radius: 50%; box-shadow:0rpx 6rpx 12rpx rgba(0,102,255,0.2);}
-.fix_nav_wp .nav_link button .plus_wp image.chuangjian{width:129rpx;height:129rpx;margin-top: 8rpx;}
+.fix_nav_wp {
+  height: 98rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  border-top: 1rpx solid #ddd;
+  z-index: 10;
+}
 
-.fix_nav_wp .nav_link button .txt{height:50rpx;line-height:40rpx;color: #666666;}
-.fix_nav_wp .nav_link button.current .txt{color: #0065FF;}
+.fix_nav_wp .nav_link {
+  flex: 1;
+  padding: 10rpx 0;
+}
+
+.fix_nav_wp .nav_link button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+  font-size: 24rpx;
+  color: #999;
+  position: relative;
+}
+
+.fix_nav_wp .nav_link button image.kecheng {
+  width: 48rpx;
+  height: 46rpx;
+}
+
+.fix_nav_wp .nav_link button image.wode {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.fix_nav_wp .nav_link button .plus_wp {
+  width: 129rpx;
+  height: 129rpx;
+  margin-top: -70rpx;
+  background-color: #0065ff;
+  border-radius: 50%;
+  box-shadow: 0rpx 6rpx 12rpx rgba(0, 102, 255, 0.2);
+}
+
+.fix_nav_wp .nav_link button .plus_wp image.chuangjian {
+  width: 129rpx;
+  height: 129rpx;
+  margin-top: 8rpx;
+}
+
+.fix_nav_wp .nav_link button .txt {
+  height: 50rpx;
+  line-height: 40rpx;
+  color: #666;
+}
+
+.fix_nav_wp .nav_link button.current .txt {
+  color: #0065ff;
+}
 
 /*  头部悬浮tab  */
-.tabCon{ width: 100%; height: 88rpx; background-color: #fff; display: flex; justify-content: center;  margin-bottom: 20rpx; position: fixed; top: 0rpx; z-index: 999; box-shadow:0px 5px 10px rgba(0,0,0,0.1);}
-.tabCon button{ height: 86rpx; line-height: 86rpx; text-align: center; flex: 1;}
-.tabCon button .current{ border-bottom: 1px solid #0065FF; color: #0065FF}
-.tabCon button view{ width: 50%; height: 100%; margin:0 auto; font-size: 28rpx; color: #666666;}
-.tabCon button view image{ width: 19rpx; height: 10rpx;}
+
+.tabCon {
+  width: 100%;
+  height: 88rpx;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20rpx;
+  position: fixed;
+  top: 0rpx;
+  z-index: 999;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tabCon button {
+  height: 86rpx;
+  line-height: 86rpx;
+  text-align: center;
+  flex: 1;
+}
+
+.tabCon button .current {
+  border-bottom: 1px solid #0065ff;
+  color: #0065ff;
+}
+
+.tabCon button view {
+  width: 50%;
+  height: 100%;
+  margin: 0 auto;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.tabCon button view image {
+  width: 19rpx;
+  height: 10rpx;
+}
+
+.loading {
+  padding: 10rpx;
+  text-align: center;
+}

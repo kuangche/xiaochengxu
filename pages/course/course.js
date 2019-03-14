@@ -10,10 +10,10 @@ Page({
     courseList: [], //数据列表
 
     pageIndex: 1, //默认显示第一页
-    pageSize: 20, //默认每页20条数据
+    pageSize: 5, //默认每页20条数据
     sortWay: 1, // 1 按点赞数降序 2 按时间降序
     loadingComplete: false, // 全部加载完成
-    isLoading:false,
+    isLoading: false,
 
     //导航数据
     navData: [{
@@ -100,6 +100,7 @@ Page({
         const courseList = data.data.Datas;
         setTimeout(()=>{
           this.setData({
+            pageIndex: ++this.data.pageIndex,
             courseList: courseList,
             loadingComplete: TotalNum == courseList.length
           });
@@ -117,15 +118,19 @@ Page({
     })
     wx.request({
       url: 'https://api.vroec.com/api/cdsp/GetCourseList',
-      method: 'post',
+      method: 'get',
       data:{
         pageIndex: this.data.pageIndex,
         pageSize: this.data.pageSize,
         sortWay: this.data.sortWay
       },
       success: (data) => {
+        const TotalNum = data.data.TotalNum;
+        const courseList = this.data.courseList.concat(data.data.Datas);
         this.setData({
-          courseList: this.data.courseList.concat(data.data),
+          pageIndex: ++this.data.pageIndex,
+          courseList: courseList,
+          loadingComplete: TotalNum == courseList.length,
           isLoading:false
         });
       }

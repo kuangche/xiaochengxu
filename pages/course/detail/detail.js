@@ -4,8 +4,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showModal:false,
+    messageTitle:'',
+    messageType: '',
     starDisabled: false,
-    showNewNum: false,
     listIndex: '',
     courseID: '',
     userID: '',
@@ -61,17 +63,38 @@ Page({
         courseID: this.data.courseID
       },
       success: (data) => {
-        this.setData({
-          starNum: data.data,
-          showNewNum: true,
-          starDisabled: true
-        },()=>{
-          this.modifyStarNum(data.data)
-        });
+        if(data.data == 0){
+          this.setData({
+            showModal: true,
+            messageTitle: '点赞失败',
+            messageType: 'shibai'
+          });
+        }else if (data.data == 1){
+          this.setData({
+            showModal: true,
+            messageTitle: '点赞成功',
+            messageType: 'chenggong',
+            starNum: data.data,
+            starDisabled: true
+          }, () => {
+            this.modifyStarNum(data.data)
+          });
+        } else if (data.data == 2) {
+          this.setData({
+            showModal:true,
+            messageTitle: '点赞失败,已经点赞',
+            messageType: 'shibai'
+          });
+        }
       }
     })
   },
-
+  hideModal() {
+    this.setData({
+      showModal: false,
+      operateType: '',
+    });
+  },
   //修改点赞数据
   modifyStarNum(num){
     const pages = getCurrentPages();

@@ -7,6 +7,7 @@ Page({
   data: {
     editor: 0,
     showModal: false,
+    getPhoneBtn: false,
     formData: {
       userNameType: true,
       phoneType: true,
@@ -111,6 +112,7 @@ Page({
 
   //获取手机号码
   getPhoneNumber(e) {
+    if (!getApp().globalData.getPhoneBtn)return;
     wx.request({
       url: 'https://api.vroec.com/api/cdsp/GetPhoneNumber',
       method: 'get',
@@ -120,8 +122,10 @@ Page({
         encryptedData: e.detail.encryptedData
       },
       success: (data)=>{
+        getApp().globalData.getPhoneBtn = false;
         this.setData({
-          phone: data.data
+          phone: data.data,
+          getPhoneBtn: false
         })
       }
     })
@@ -130,6 +134,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(opts) {
+    this.setData({
+      getPhoneBtn: getApp().globalData.getPhoneBtn,
+    })
     if(opts.editor == 1){
       const pages = getCurrentPages();
       const prevPage = pages[pages.length - 2];  //上一个页面

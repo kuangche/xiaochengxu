@@ -4,21 +4,15 @@ App({
     // 登录
     wx.login({
       success: (res) => {
+        this.globalData.code = res.code;
         if (res.code) {
           //TODO  根据用户code 获取openID 此时根据openID 判断是否已经完成注册，完成注册以后不需要跳转到授权页面；
-          this.globalData.code = res.code;
-          const openID = wx.getStorageSync('openID');
-          if (openID) {
-            this.checkRegister(openID)
-          } else {
-            this.getOpenID({
-              code: res.code,
-              callBack: (openID) => {
-                this.checkRegister(openID)
-              }
-            })
-          }
-          
+          this.getOpenID({
+            code: res.code,
+            callBack: (openID) => {
+              this.getUser(openID)
+            }
+          })
         } else {
           console.log('获取用户登录态失败！' + res.errMsg)
         }
@@ -27,7 +21,7 @@ App({
   },
 
   //检查用户是否已经注册
-  checkRegister(openID){
+  getUser(openID){
     wx.request({ //获取个人的openID
       url: 'https://api.vroec.com/api/cdsp/GetUserByOpenID',
       method: 'get',
@@ -71,6 +65,7 @@ App({
   
   globalData: {
     code:'',
+    getPhoneBtn: true,
     userInfo: {
       openID: '',//微信小程序用户唯一识别
       userID: 0,//用户内置ID （如果是注册，默认为0）

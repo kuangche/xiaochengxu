@@ -113,9 +113,4 @@
   font-size: 30rpx;
   color: #4a4a4a;
   margin: 60rpx;
-}
-
-.loading{  
-  padding: 10rpx;  
-  text-align: center;  
-}  
+} 

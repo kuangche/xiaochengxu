@@ -19,3 +19,14 @@
 <button open-type="share" class="share">
   <image src="../../../images/courseDetailShare.png"/>
 </button>
+
+<view class="modal-mask" bindtap="hideModal" wx:if="{{showModal}}"></view>
+<view class="modal-content" wx:if="{{showModal}}">
+  <view class='contact_modal'>
+    <image src='/images/{{messageType}}.png'></image>
+    <text class='contact_text_modal'>{{messageTitle}}</text>
+  </view>
+  <view class="operate">
+    <button class='default_btn btn_full {{messageType}}' bindtap="hideModal">好的</button>
+  </view>
+</view>

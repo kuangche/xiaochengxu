@@ -11,7 +11,7 @@
     <view class="section">
       <view class="section__title">电话</view>
       <input type="number" name="phone" maxlength='11' value='{{formData.phone}}' placeholder="请输入您的联系方式" placeholder-class="{{formData.phoneType || 'error'}}"/>
-      <button class="getPhone" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">自动获取</button>
+      <button disabled='{{!getPhoneBtn}}' class="getPhone {{getPhoneBtn ? '' : 'disabled'}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">自动获取</button>
     </view>
     <view class="section">
       <view class="section__title">学校</view>

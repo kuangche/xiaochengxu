@@ -1,4 +1,3 @@
-const app = getApp();
 Page({
 
   /**
@@ -35,7 +34,14 @@ Page({
     if (!this.data.formData.userName){
       return false;
     }
-    if(!this.data.formData.phone){
+    if (!this.data.formData.phone || !/^[1][3,8]\d{9}/.test(this.data.formData.phone)){
+      this.setData({
+        formData:{
+          ...this.data.formData,
+          phoneType: false,
+          phone:''
+        }
+      })
       return false;
     }
     if(!this.data.formData.school){
@@ -123,10 +129,24 @@ Page({
       },
       success: (data)=>{
         getApp().globalData.getPhoneBtn = false;
-        this.setData({
-          phone: data.data,
-          getPhoneBtn: false
-        })
+        if (/^[1][3,8]\d{9}/.test(data.data)){
+          this.setData({
+            phone: data.data,
+            getPhoneBtn: false
+          })
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: data.data,
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        }
       }
     })
   },

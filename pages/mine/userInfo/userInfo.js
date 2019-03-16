@@ -4,7 +4,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    editor: 0,
     showModal: false,
     getPhoneBtn: false,
     formData: {
@@ -21,7 +20,7 @@ Page({
 
   //提交表单
   formSubmit(e) {
-    var currData = e.detail.value;
+    const currData = e.detail.value;
     this.setData({
       formData: {
         userNameType: !!currData.userName,
@@ -50,7 +49,7 @@ Page({
     if(!this.data.formData.college){
         return false;
     }
-    app.globalData.userInfo = {
+    getApp().globalData.userInfo = {
       ...getApp().globalData.userInfo,
       phoneNumber: currData.phone, //手机号码
       trueName: currData.userName, //真实姓名
@@ -58,7 +57,7 @@ Page({
       department: currData.college //院系
     }
 
-    this.saveUserInfo(app.globalData.userInfo)
+    this.saveUserInfo(getApp().globalData.userInfo)
   },
 
   //显示弹窗
@@ -86,7 +85,7 @@ Page({
   //保存用户信息
   saveUserInfo(opts){
     const baseUserInfo = getApp().globalData.userInfo;
-    const openID = wx.getStorageSync('openID');
+    const openID = baseUserInfo.openID;
     const formData = this.data.formData;
     wx.request({
       url: 'https://api.vroec.com/api/cdsp/SaveUser',
@@ -110,8 +109,8 @@ Page({
         this.setData({
           showModal: true
         })
-        wx.setStorageSync('finish', 'true')
-        app.globalData.userInfo.userID = data.data;
+        getApp().globalData.isLogin = true;
+        getApp().globalData.userInfo.userID = data.data;
       }
     })
   },
@@ -123,17 +122,24 @@ Page({
       url: 'https://api.vroec.com/api/cdsp/GetPhoneNumber',
       method: 'get',
       data:{
-        code: getApp().globalData.code,
+        sessionKey: getApp().globalData.sessionKey,
         iv: e.detail.iv,
         encryptedData: e.detail.encryptedData
       },
       success: (data)=>{
         getApp().globalData.getPhoneBtn = false;
-        if (/^[1][3,8]\d{9}/.test(data.data)){
+        const purePhoneNumber = data.data.purePhoneNumber;
+        if (/^[1][3,8]\d{9}/.test(purePhoneNumber)){
           this.setData({
-            phone: data.data,
+            phone: purePhoneNumber,
             getPhoneBtn: false
           })
+          this.setData({
+            formData: {
+              ...this.data.formData,
+              phone: purePhoneNumber
+            }
+          });
         }else{
           wx.showModal({
             title: '提示',
@@ -156,13 +162,13 @@ Page({
   onLoad(opts) {
     this.setData({
       getPhoneBtn: getApp().globalData.getPhoneBtn,
-    })
-    if(opts.editor == 1){
+    });
+    //如果从个人中心页面进来，则需要获取前一页的数据，把相关内容回显到此页面当中；
+    if (opts.editor && opts.editor == 1){
       const pages = getCurrentPages();
       const prevPage = pages[pages.length - 2];  //上一个页面
       const userInfo = getApp().globalData.userInfo; //取上页data里的数据也可以修
       this.setData({
-        editor: opts.editor,
         formData: {
           userNameType: true,
           phoneType: true,
@@ -175,7 +181,6 @@ Page({
         }
       })
     }
-    
   }
 
 

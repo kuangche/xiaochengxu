@@ -75,7 +75,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    if(wx.getStorageSync('finish')){
+    if(getApp().globalData.isLogin){
       this.getCourseData({
         pageIndex: this.data.pageIndex,
         pageSize: this.data.pageSize,

@@ -32,7 +32,7 @@ App({
         const userData = data.data;
         if (userData){
           this.globalData.userInfo = userData;
-          wx.setStorageSync('finish', 'ture');
+          this.globalData.isLogin = true;
           //此时非首次登陆系统，或者可能删掉小程序后亦或者清除缓存后 再次进入
           wx.redirectTo({
             url: '/pages/course/course'
@@ -49,16 +49,17 @@ App({
   // 获取openID
   getOpenID(opts){
     wx.request({ //获取个人的openId
-      url: 'https://api.vroec.com/api/cdsp/GetOpenID',
+      url: 'https://api.vroec.com/api/cdsp/GetCode2Session',
       method: 'get',
       data: {
         code: opts.code
       },
       success: (data) => {
-        const openID = data.data;
-        wx.setStorageSync('openID', openID);
-        this.globalData.userInfo.openID = openID
-        opts.callBack(openID);
+        const wxData = data.data;
+        this.globalData.openID = wxData.openid;
+        this.globalData.sessionKey = wxData.session_key;
+        this.globalData.isLogin = true;
+        opts.callBack(wxData.openid);
       }
     })
   },
@@ -66,6 +67,7 @@ App({
   globalData: {
     code:'',
     getPhoneBtn: true,
+    isLogin:false,
     userInfo: {
       openID: '',//微信小程序用户唯一识别
       userID: 0,//用户内置ID （如果是注册，默认为0）

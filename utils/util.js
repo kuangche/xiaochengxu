@@ -16,10 +16,17 @@ const formatNumber = n => {
 
 
 function ajax(options){
-  wx.request({
-    url: getApp().globalData.server + options.url,
-    ...options
-  })
+  var isLogin = getApp().globalData.isLogin;//登录过后，用户信息会缓存
+  if (!isLogin) {
+    wx.redirectTo({
+      url: '/pages/login/login'
+    })
+  } else {
+    wx.request({
+      ...options,
+      url: getApp().globalData.server + options.url
+    })
+  }
 }
 
 module.exports = {

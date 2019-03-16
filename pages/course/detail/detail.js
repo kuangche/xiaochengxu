@@ -26,16 +26,16 @@ Page({
     }
     return {
       title: '转发',
-      path: '/pages/index/community/topic/topic?jsonStr=' + this.data.list
+      path: '/pages/course/detail/detail?courseID=' + this.data.courseID
     }
   },
 
-  getCourseDetail: function (opts = { courseID:''}){
+  getCourseDetail: function (opts){
     wx.request({
       url: 'https://api.vroec.com/api/cdsp/GetCourseByID',
       method: 'get',
       data: {
-        ...opts
+        courseID: opts.courseID
       },
       success: (data) => {
         const courseDetail = data.data;
@@ -100,14 +100,16 @@ Page({
     const pages = getCurrentPages();
     const prevPage = pages[pages.length - 2];  //上一个页面
     const courseList = prevPage.data.courseList; //取上页data里的数据也可以修
-    courseList[this.data.listIndex].course_praise_num = num;
+    courseList[parseInt(this.data.listIndex)].course_praise_num = num;
     prevPage.setData({
       courseList
     })
   },
 
   onLoad(opts){
-
+    this.setData({
+      ...opts
+    })
     //获取详细信息
     this.getCourseDetail({
       courseID: opts.courseID

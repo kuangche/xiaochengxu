@@ -7,62 +7,6 @@
   bottom: 0rpx;
 }
 
-.courseList scroll-view{
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.courseList .list {
-  background: #fff;
-  border-radius: 12rpx;
-  margin-bottom: 20rpx;
-  padding: 46rpx 40rpx;
-}
-
-.courseList .list .title {
-  font-size: 34rpx;
-  color: #333;
-  margin-bottom: 24rpx;
-}
-
-.courseList .list .desc {
-  font-size: 26rpx;
-  color: #999;
-  margin-bottom: 24rpx;
-}
-
-.courseList .list .info {
-  overflow: hidden;
-}
-
-.courseList .list .info .right {
-  height: 32rpx;
-  line-height: 30rpx;
-  border: 1px solid #ddd;
-  border-radius: 15rpx;
-}
-
 .courseList .list .info .right>text:nth-child(1) {
   margin: 0rpx 20rpx;
-}
-
-.courseList .list .info .right .star {
-  display: inline-block;
-  line-height: 30rpx;
-  height: 30rpx;
-  background-color: rgba(118, 87, 250, 0.2);
-  border-radius: 15rpx;
-  padding: 0 20rpx;
-}
-
-.courseList .list .info .right .star image {
-  width: 22rpx;
-  height: 22rpx;
-  margin: 5rpx 10rpx 0 0;
-  vertical-align: top;
 }

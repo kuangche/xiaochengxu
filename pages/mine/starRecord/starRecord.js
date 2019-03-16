@@ -10,16 +10,17 @@ Page({
     courseList: null,
     loadingComplete: false,
     isLoading: false,
-    pageIndex:1,	//当前页数，默认从第一页开始。
-    pageSize:5	//每页显示的记录数。
+    pageIndex: 1,	//当前页数，默认从第一页开始。
+    pageSize: 5	//每页显示的记录数。
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const userInfo = getApp().globalData.userInfo
     this.setData({
-        userID: getApp().globalData.userInfo.user_id
+        userID: userInfo.user_id
     },()=>{
       this.getCourseData();
     })

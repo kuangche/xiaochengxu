@@ -12,9 +12,7 @@
   </view>
 </view>
 <view class="operate" wx:if="{{searchData.releaseState == 0}}">
-  <navigator url="/pages/publish/publish?courseID={{searchData.courseID}}">
-    <button class="btn_empty">编辑课程</button>
-  </navigator>
+  <button class="btn_empty" bindtap='edit'>编辑课程</button>
   <button class="btn_full" bindtap='publish'>发布课程</button>
 </view>
 
@@ -22,10 +20,6 @@
   <button class="star">
     <image src="../../../images/courseDetailStar.png"/>
     <text>{{starNum}}</text>
-  </button>
-
-  <button open-type="share" class="share">
-    <image src="../../../images/courseDetailShare.png"/>
   </button>
 </block>
 

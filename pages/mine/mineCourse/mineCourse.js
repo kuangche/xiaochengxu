@@ -60,13 +60,17 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-    const userInfo = getApp().globalData.userInfo;
-    this.getCourseList({
-      userID: userInfo.user_id,	//用户ID，内置的唯一标识。
-      releaseState: this.data.releaseState,	//发布状态，0 未发布 1，已发布
-      pageIndex: this.data.pageIndex,	//当前页数，默认从第一页开始。
-      pageSize: this.data.pageSize,	//每页显示的记录数。
+  onLoad(opts) {
+    this.setData({
+      releaseState: opts.releaseState || 1
+    },()=>{
+      const userInfo = getApp().globalData.userInfo;
+      this.getCourseList({
+        userID: userInfo.user_id,	//用户ID，内置的唯一标识。
+        releaseState: this.data.releaseState,	//发布状态，0 未发布 1，已发布
+        pageIndex: this.data.pageIndex,	//当前页数，默认从第一页开始。
+        pageSize: this.data.pageSize,	//每页显示的记录数。
+      })
     })
   },
 

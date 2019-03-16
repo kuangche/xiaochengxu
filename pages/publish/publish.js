@@ -15,7 +15,8 @@ Page({
     articleType: '',
     courseNameType: '',
     nameFocus: '',
-    articleFocus: ''
+    articleFocus: '',
+    toViewUrl: ''
   },
 
   nameBlur(){
@@ -78,7 +79,8 @@ Page({
       success: ()=> {
         this.setData({
           operateType: '保存',
-          showModal: true
+          showModal: true,
+          toViewUrl: "/pages/mine/mineCourse/mineCourse?releaseState=0"
         })
       }
     })
@@ -111,7 +113,8 @@ Page({
       success: ()=> {
         this.setData({
           operateType: '发布',
-          showModal: true
+          showModal: true,
+          toViewUrl: "/pages/mine/mineCourse/mineCourse?releaseState=1"
         })
       }
     })
@@ -137,8 +140,8 @@ Page({
       courseName: '',
       article: ''
     });
-    wx.navigateTo({
-      url: "/pages/mine/mineCourse/mineCourse",
+    wx.redirectTo({
+      url: this.data.toViewUrl
     });
   },
 

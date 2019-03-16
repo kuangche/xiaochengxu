@@ -46,10 +46,8 @@ Page({
       url: '/pages/mine/mine',
     });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
+
+  onShow(options) {
     wx.request({
       url:'https://api.vroec.com/api/cdsp/GetUserByID',
       method: 'get',

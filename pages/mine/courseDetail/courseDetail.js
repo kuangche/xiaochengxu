@@ -1,6 +1,3 @@
-import {
-  ajax
-} from '../../../utils/util.js';
 Page({
 
   /**
@@ -16,16 +13,12 @@ Page({
     time: ''
   },
 
-  //转发
-  onShareAppMessage: function (res) {
-    if (res.from == 'button') {
-      debugger;
-    }
-    return {
-      title: '转发',
-      path: '/pages/index/community/topic/topic?jsonStr=' + this.data.list
-    }
+  edit(){
+    wx.redirectTo({
+      url: '/pages/publish/publish?courseID=' + this.data.searchData.courseID,
+    });
   },
+
   publish(){
     wx.request({
       url: 'https://api.vroec.com/api/cdsp/ReleaseCourse',
@@ -34,7 +27,6 @@ Page({
         courseID: this.data.searchData.courseID
       },
       success: (data) => {
-        //TODO
         this.setData({
           showModal: true
         });
@@ -69,9 +61,10 @@ Page({
   toView() {
     this.setData({
       showModal: false,
-    });
-    wx.navigateTo({
-      url: "/pages/mine/mineCourse/mineCourse",
+    },() =>{
+      wx.redirectTo({
+        url: '/pages/course/course',
+      });
     });
   },
   onLoad(opts){

@@ -68,8 +68,8 @@ Page({
     this.setData({
       showModal: false
     });
-    wx.redirectTo({
-      url: '/pages/mine/mine'
+    wx.navigateBack({
+      delta: 1
     })
   },
 

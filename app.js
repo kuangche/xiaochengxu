@@ -33,6 +33,7 @@ App({
         if (userData){
           this.globalData.userInfo = userData;
           this.globalData.isLogin = true;
+          //保存基础用户信息
           this.globalData.baseInfo = {
             nickName: userData.user_nick_name,
             avatarUrl: userData.user_head_image,
@@ -76,6 +77,7 @@ App({
     openID: '',
     isLogin: false,
     getPhoneBtn: true,
+    courseStrLeng: 90,
     baseInfo:{},
     userInfo: {},
     server: "https://api.vroec.com/api/cdsp"

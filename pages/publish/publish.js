@@ -12,6 +12,8 @@ Page({
     operateType: '',
     courseName: '',
     article: '',
+    articleType: '',
+    courseNameType: '',
     nameFocus: '',
     articleFocus: ''
   },
@@ -49,6 +51,20 @@ Page({
   },
 
   saveCourse(){
+    let state = true;
+    if (!this.data.courseName) {
+      this.setData({
+        courseNameType: 'error'
+      });
+      state = false;
+    }
+    if (!this.data.article) {
+      this.setData({
+        articleType: 'error'
+      });
+      state = false;
+    }
+    if (!state) return;
     wx.request({
       url: 'https://api.vroec.com/api/cdsp/SaveCourse',
       method: 'post',
@@ -68,6 +84,20 @@ Page({
     })
   },
   publishCourse() {
+    let state = true;
+    if (!this.data.courseName) {
+      this.setData({
+        courseNameType: 'error'
+      });
+      state = false;
+    }
+    if (!this.data.article) {
+      this.setData({
+        articleType: 'error'
+      });
+      state = false;
+    }
+    if(!state)return;
     wx.request({
       url: 'https://api.vroec.com/api/cdsp/SaveCourse',
       method: 'post',

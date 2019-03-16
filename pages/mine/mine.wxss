@@ -19,7 +19,7 @@
 }
 .header .left .otherInfo>view{
   flex: 1;
-  font-size: 22rpx;
+  font-size: 26rpx;
 }
 .header .left .otherInfo>view>text{
   color: #0066FF;

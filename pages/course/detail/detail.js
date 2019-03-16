@@ -41,7 +41,7 @@ Page({
         const courseDetail = data.data;
         this.setData({
           courseID: courseDetail.course_id,
-          userID: courseDetail.user_id,
+          userID: getApp().globalData.userInfo.user_id,
           title: courseDetail.course_title,
           html: courseDetail.course_summary,
           starNum: courseDetail.course_praise_num,
@@ -107,12 +107,6 @@ Page({
   },
 
   onLoad(opts){
-    this.setData({
-      school: opts.school,
-      userName: opts.userName,
-      listIndex: opts.listIndex,
-      starDisabled: opts.checkStar == 1 ? true: false
-    });
 
     //获取详细信息
     this.getCourseDetail({

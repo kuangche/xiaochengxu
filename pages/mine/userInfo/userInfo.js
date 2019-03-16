@@ -20,8 +20,8 @@ Page({
 
   //提交表单
   formSubmit(e) {
-    debugger;
     const currData = e.detail.value;
+    let state = true;
     this.setData({
       userNameType: !!currData.userName,
       phoneType: !!currData.phone,
@@ -31,22 +31,24 @@ Page({
       ...currData
     });
     if (!this.data.userName){
-      return false;
+      state = false;
     }
     if (!this.data.phone || !/^[1][3,8]\d{9}/.test(this.data.phone)){
       this.setData({
         phoneType: false,
         phone: ''
       })
-      return false;
+      state = false;
     }
     if(!this.data.school){
-      return false;
+      state = false;
     }
     if(!this.data.college){
-        return false;
+      state = false;
     }
-    this.saveUserInfo()
+    if(state){
+      this.saveUserInfo()
+    }
   },
 
   //显示弹窗

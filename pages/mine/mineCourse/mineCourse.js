@@ -1,4 +1,5 @@
 const app = getApp()
+import { ajax, getLength, cutstr } from '../../../utils/util.js';
 Page({
 
   /**
@@ -38,9 +39,14 @@ Page({
         this.setData({
           courseList: null
         });
-
+        const courseStrLeng = getApp().globalData.courseStrLeng;
         const TotalNum = data.data.TotalNum;
         const courseList = data.data.Datas;
+        courseList.forEach((item, index) => {
+          if (getLength(item.course_summary) > courseStrLeng) {
+            item.course_summary = cutstr(item.course_summary, courseStrLeng)
+          }
+        });
         setTimeout(() => {
           this.setData({
             pageIndex: ++this.data.pageIndex,

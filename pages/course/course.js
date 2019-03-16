@@ -1,6 +1,6 @@
 //获取应用实例
 const app = getApp()
-
+import { ajax, getLength, cutstr} from '../../utils/util.js'
 Page({
 
   /**
@@ -71,13 +71,11 @@ Page({
       sortWay: this.data.sortWay
     });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad() {
     if(getApp().globalData.isLogin){
       this.getCourseData({
-        pageIndex: this.data.pageIndex,
+        pageIndex: 1,
         pageSize: this.data.pageSize,
         sortWay: this.data.sortWay
       });
@@ -92,12 +90,18 @@ Page({
         ...opts
       },
       success: (data) => {
+        const courseStrLeng = getApp().globalData.courseStrLeng;
         this.setData({
           courseList: null
         });
 
         const TotalNum = data.data.TotalNum;
         const courseList = data.data.Datas;
+        courseList.forEach((item,index) =>{
+          if (getLength(item.course_summary) > courseStrLeng){
+            item.course_summary = cutstr(item.course_summary, courseStrLeng)
+          }
+        });
         setTimeout(()=>{
           this.setData({
             pageIndex: ++this.data.pageIndex,

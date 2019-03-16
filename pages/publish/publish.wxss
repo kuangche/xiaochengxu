@@ -47,6 +47,9 @@ page{
 .publishCon .operate button{
   margin: 0 30rpx;
 }
+.publishCon .error{
+  color: red;
+}
 
 .modal-mask {
   width: 100%;

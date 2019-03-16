@@ -2,21 +2,21 @@
 <view class="publishCon">
   <form>
     <view class="section">
-      <input class="{{nameFocus}}" bindfocus='nameFocus' bindblur='nameBlur' name="courseName" value='{{courseName}}' placeholder="请输入您的名字" bindinput='nameBlue'/>
+      <input class="{{nameFocus}}" bindfocus='nameFocus' bindblur='nameBlur' name="courseName" value='{{courseName}}' placeholder="请输入课程名称" placeholder-class='{{courseNameType}}' bindinput='nameBlue' />
     </view>
     <view class="section">
       <view wx:if="{{showModal}}" class="replaceCon">{{article}}</view>
-      <textarea wx:else name="article" class="{{articleFocus}}" bindfocus='articleFocus' bindblur='articleBlur' value='{{article}}' placeholder="请输入课程详细描述" bindinput='articleBlue'/>
+      <textarea wx:else name="article" maxlength="500" class="{{articleFocus}}" bindfocus='articleFocus' bindblur='articleBlur' value='{{article}}' placeholder="请输入课程描述" placeholder-class='{{articleType}}' bindinput='articleBlue' />
     </view>
   </form>
 
 
   <view class="operate">
     <button bindtap="saveCourse" class="default_btn btn_empty">
-    保存
+      保存
     </button>
     <button bindtap="publishCourse" class="default_btn btn_full">
-    发布
+      发布
     </button>
   </view>
 </view>

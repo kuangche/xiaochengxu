@@ -31,7 +31,7 @@
 }
 
 .courseList .list .desc {
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #999;
   margin-bottom: 24rpx;
 }

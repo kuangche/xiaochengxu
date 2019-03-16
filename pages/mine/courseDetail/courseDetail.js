@@ -56,7 +56,7 @@ Page({
           title: courseDetail.course_title,
           html: courseDetail.course_summary,
           starNum: courseDetail.course_praise_num,
-          time: courseDetail.course_release_time
+          time: courseDetail.course_is_release ? courseDetail.course_release_time : courseDetail.course_create_time
         });
       }
     })

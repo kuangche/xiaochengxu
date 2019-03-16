@@ -110,7 +110,8 @@ Page({
     this.setData({
       school: opts.school,
       userName: opts.userName,
-      listIndex: opts.listIndex
+      listIndex: opts.listIndex,
+      starDisabled: opts.checkStar == 1 ? true: false
     });
 
     //获取详细信息

@@ -6,58 +6,47 @@ Page({
   data: {
     showModal: false,
     getPhoneBtn: false,
-    formData: {
-      userNameType: true,
-      phoneType: true,
-      schoolType: true,
-      collegeType: true,
-      userName: '',
-      phone: '',
-      school: '',
-      college: '',
-    }
+    
+    userNameType: true,
+    phoneType: true,
+    schoolType: true,
+    collegeType: true,
+
+    userName: '',
+    phone: '',
+    school: '',
+    college: '',
   },
 
   //提交表单
   formSubmit(e) {
+    debugger;
     const currData = e.detail.value;
     this.setData({
-      formData: {
-        userNameType: !!currData.userName,
-        phoneType: !!currData.phone,
-        schoolType: !!currData.school,
-        collegeType: !!currData.college,
-        ...currData
-      }
+      userNameType: !!currData.userName,
+      phoneType: !!currData.phone,
+      schoolType: !!currData.school,
+      collegeType: !!currData.college,
+
+      ...currData
     });
-    if (!this.data.formData.userName){
+    if (!this.data.userName){
       return false;
     }
-    if (!this.data.formData.phone || !/^[1][3,8]\d{9}/.test(this.data.formData.phone)){
+    if (!this.data.phone || !/^[1][3,8]\d{9}/.test(this.data.phone)){
       this.setData({
-        formData:{
-          ...this.data.formData,
-          phoneType: false,
-          phone:''
-        }
+        phoneType: false,
+        phone: ''
       })
       return false;
     }
-    if(!this.data.formData.school){
+    if(!this.data.school){
       return false;
     }
-    if(!this.data.formData.college){
+    if(!this.data.college){
         return false;
     }
-    getApp().globalData.userInfo = {
-      ...getApp().globalData.userInfo,
-      phoneNumber: currData.phone, //手机号码
-      trueName: currData.userName, //真实姓名
-      school: currData.school, //学校
-      department: currData.college //院系
-    }
-
-    this.saveUserInfo(getApp().globalData.userInfo)
+    this.saveUserInfo()
   },
 
   //显示弹窗
@@ -83,48 +72,52 @@ Page({
   },
 
   //保存用户信息
-  saveUserInfo(opts){
-    const baseUserInfo = getApp().globalData.userInfo;
-    const openID = baseUserInfo.openID;
-    const formData = this.data.formData;
+  saveUserInfo(){
+    const globalData = getApp().globalData;
+    const baseInfo = globalData.baseInfo;
+    const userInfo = globalData.userInfo;
+    const openID = globalData.openID;
+    const formData = this.data;
     wx.request({
       url: 'https://api.vroec.com/api/cdsp/SaveUser',
       method: 'post',
       data: {
         user_open_id: openID,
+
         user_phone_number: formData.phone,
         user_true_name: formData.userName,
         user_school: formData.school,
         user_department: formData.college,
-        user_nick_name: baseUserInfo.user_nick_name,
-        user_head_image: baseUserInfo.user_head_image,
-        user_sex: baseUserInfo.user_sex,
-        user_country: baseUserInfo.user_country,
-        user_province: baseUserInfo.user_province,
-        user_city: baseUserInfo.user_city,
-        user_id: baseUserInfo.user_id
+
+        user_nick_name: baseInfo.nickName,
+        user_head_image: baseInfo.avatarUrl,
+        user_sex: baseInfo.gender,
+        user_country: baseInfo.country,
+        user_province: baseInfo.province,
+        user_city: baseInfo.city,
+        user_id: globalData.isLogin ? userInfo.user_id : 0
       },
       success: (data)=>{
-        //TODO
         this.setData({
           showModal: true
         })
         getApp().globalData.isLogin = true;
-        getApp().globalData.userInfo.userID = data.data;
+        getApp().globalData.userInfo.user_id = data.data;
       }
     })
   },
 
   //获取手机号码
   getPhoneNumber(e) {
-    if (!getApp().globalData.getPhoneBtn)return;
+    const dataDetail = e.detail;
+    if (!getApp().globalData.getPhoneBtn && dataDetail)return;
     wx.request({
       url: 'https://api.vroec.com/api/cdsp/GetPhoneNumber',
       method: 'get',
       data:{
         sessionKey: getApp().globalData.sessionKey,
-        iv: e.detail.iv,
-        encryptedData: e.detail.encryptedData
+        iv: dataDetail.iv,
+        encryptedData: dataDetail.encryptedData
       },
       success: (data)=>{
         getApp().globalData.getPhoneBtn = false;
@@ -165,20 +158,16 @@ Page({
     });
     //如果从个人中心页面进来，则需要获取前一页的数据，把相关内容回显到此页面当中；
     if (opts.editor && opts.editor == 1){
-      const pages = getCurrentPages();
-      const prevPage = pages[pages.length - 2];  //上一个页面
       const userInfo = getApp().globalData.userInfo; //取上页data里的数据也可以修
       this.setData({
-        formData: {
-          userNameType: true,
-          phoneType: true,
-          schoolType: true,
-          collegeType: true,
-          userName: userInfo.user_true_name,
-          phone: userInfo.user_phone_number,
-          school: userInfo.user_school,
-          college: userInfo.user_department,
-        }
+        userNameType: true,
+        phoneType: true,
+        schoolType: true,
+        collegeType: true,
+        userName: userInfo.user_true_name,
+        phone: userInfo.user_phone_number,
+        school: userInfo.user_school,
+        college: userInfo.user_department,
       })
     }
   }

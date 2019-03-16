@@ -24,8 +24,9 @@
               <text class="num">{{item.course_praise_num}}</text>
             </view>
           </view>
+          
           <view class="right" wx:else>
-            <text class="name">{{item.course_release_time}}</text>
+            <text class="name">{{item.course_create_time}}</text>
           </view>
         </view>
       </navigator>

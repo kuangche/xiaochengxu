@@ -33,6 +33,14 @@ App({
         if (userData){
           this.globalData.userInfo = userData;
           this.globalData.isLogin = true;
+          this.globalData.baseInfo = {
+            nickName: userData.user_nick_name,
+            avatarUrl: userData.user_head_image,
+            gender: userData.user_sex,
+            country: userData.user_country,
+            province: userData.user_province,
+            city: userData.user_city,
+          }
           //此时非首次登陆系统，或者可能删掉小程序后亦或者清除缓存后 再次进入
           wx.redirectTo({
             url: '/pages/course/course'
@@ -58,7 +66,6 @@ App({
         const wxData = data.data;
         this.globalData.openID = wxData.openid;
         this.globalData.sessionKey = wxData.session_key;
-        this.globalData.isLogin = true;
         opts.callBack(wxData.openid);
       }
     })
@@ -66,23 +73,11 @@ App({
   
   globalData: {
     code:'',
+    openID: '',
+    isLogin: false,
     getPhoneBtn: true,
-    isLogin:false,
-    userInfo: {
-      openID: '',//微信小程序用户唯一识别
-      userID: 0,//用户内置ID （如果是注册，默认为0）
-      phoneNumber: '',//手机号码
-      trueName: '',//真实姓名
-      school: '',//学校
-      department: '',//院系
-
-      nickName: '',//昵称
-      headImage: '',//头像
-      sex: '',//性别
-      country: '',//国家
-      province: '',//省份
-      city: ''//城市
-    },
+    baseInfo:{},
+    userInfo: {},
     server: "https://api.vroec.com/api/cdsp"
   }
 })

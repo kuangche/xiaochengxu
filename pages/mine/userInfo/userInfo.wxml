@@ -6,20 +6,20 @@
   <form bindsubmit="formSubmit">
     <view class="section">
       <view class="section__title">姓名</view>
-      <input type="text" name="userName" value='{{formData.userName}}' placeholder="请输入您的名字" placeholder-class="{{formData.userNameType || 'error'}}"/>
+      <input type="text" name="userName" value='{{userName}}' placeholder="请输入您的名字" placeholder-class="{{userNameType || 'error'}}"/>
     </view>
     <view class="section">
       <view class="section__title">电话</view>
-      <input type="number" name="phone" maxlength='11' value='{{formData.phone}}' placeholder="请输入您的联系方式" placeholder-class="{{formData.phoneType || 'error'}}"/>
+      <input type="number" name="phone" maxlength='11' value='{{phone}}' placeholder="请输入您的联系方式" placeholder-class="{{phoneType || 'error'}}"/>
       <button disabled='{{!getPhoneBtn}}' class="getPhone {{getPhoneBtn ? '' : 'disabled'}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">自动获取</button>
     </view>
     <view class="section">
       <view class="section__title">学校</view>
-      <input type="text" name="school" value='{{formData.school}}' placeholder="请输入您的所在院校" placeholder-class="{{formData.schoolType || 'error'}}"/>
+      <input type="text" name="school" value='{{school}}' placeholder="请输入您的所在院校" placeholder-class="{{schoolType || 'error'}}"/>
     </view>
     <view class="section">
       <view class="section__title">所需院系</view>
-      <input type="text" name="college" value='{{formData.college}}' placeholder="请输入您的所在院系" placeholder-class="{{formData.collegeType || 'error'}}"/>
+      <input type="text" name="college" value='{{college}}' placeholder="请输入您的所在院系" placeholder-class="{{collegeType || 'error'}}"/>
     </view>
     <view class="operate">
       <button class="btn_full" formType="submit">保存</button>

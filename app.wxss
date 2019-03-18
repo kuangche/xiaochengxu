@@ -209,7 +209,7 @@ page {
 
 /*  加载状态  */
 
-.loading {
+.tips {
   padding: 10rpx;
   text-align: center;
 }

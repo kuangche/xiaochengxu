@@ -20,8 +20,7 @@ Page({
     starNum: '',
     time: '',
     school: '',
-    userName: '',
-    startData: []
+    userName: ''
   },
 
   //转发
@@ -52,21 +51,6 @@ Page({
           starNum: courseDetail.course_praise_num,
           time: courseDetail.course_release_time
         });
-      }
-    })
-  },
-
-  getStarData(opts){
-    wx.request({
-      url: 'https://api.vroec.com/api/cdsp/GetPraiseDetailByCourseID',
-      method: 'get',
-      data: {
-        courseID: opts.courseID
-      },
-      success: (data) => {
-        this.setData({
-          starData: data.data
-        })
       }
     })
   },
@@ -134,8 +118,5 @@ Page({
     this.getCourseDetail({
       courseID: opts.courseID
     });
-    this.getStarData({
-      courseID: opts.courseID
-    })
   }
 })

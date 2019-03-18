@@ -6,27 +6,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-    searchData: null,
     starDisabled: false,
     showNewNum: false,
     title: '',
     html: '',
     starNum: 0,
-    time: ''
+    time: '',
+    starData:[]
   },
 
   edit(){
     wx.redirectTo({
-      url: '/pages/publish/publish?courseID=' + this.data.searchData.courseID,
+      url: '/pages/publish/publish?courseID=' + this.data.courseID,
     });
   },
 
   publish(){
     ajax({
-      url: 'https://api.vroec.com/api/cdsp/ReleaseCourse',
+      url: '/ReleaseCourse',
       method: 'get',
       data: {
-        courseID: this.data.searchData.courseID
+        courseID: this.data.courseID
       },
       success: (data) => {
         this.setData({
@@ -36,8 +36,8 @@ Page({
     })
   },
   getCourseDetail: function (opts = { courseID: '' }) {
-    wx.request({
-      url: 'https://api.vroec.com/api/cdsp/GetCourseByID',
+    ajax({
+      url: '/GetCourseByID',
       method: 'get',
       data: {
         ...opts
@@ -71,14 +71,28 @@ Page({
   },
   onLoad(opts){
     this.setData({
-      searchData: {
-        releaseState: opts.releaseState,
-        courseID: opts.courseID
-      }
+      ...opts
     },()=>{
       this.getCourseDetail({
         courseID: opts.courseID
+      });
+      this.getStarData({
+        courseID: opts.courseID
       })
     })
-  }
+  },
+  getStarData(opts) {
+    ajax({
+      url: '/GetPraiseDetailByCourseID',
+      method: 'get',
+      data: {
+        courseID: opts.courseID
+      },
+      success: (data) => {
+        this.setData({
+          starData: data.data
+        })
+      }
+    })
+  },
 })

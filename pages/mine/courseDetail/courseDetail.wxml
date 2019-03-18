@@ -10,13 +10,22 @@
   <view class="article">
     <rich-text nodes="{{html}}"></rich-text>
   </view>
+
+  <view class='starList' wx:if="{{releaseState == 1}}">
+    <view wx:for="{{starData}}"  wx:key="item.user_id">
+      <text>{{item.praise_date}}</text>
+      <text>{{item.praise_time}}</text>
+      <text>{{item.user_true_name}}</text>
+      <text>点赞 +1</text>
+    </view>
+  </view>
 </view>
-<view class="operate" wx:if="{{searchData.releaseState == 0}}">
+<view class="operate" wx:if="{{releaseState == 0}}">
   <button class="btn_empty" bindtap='edit'>编辑课程</button>
   <button class="btn_full" bindtap='publish'>发布课程</button>
 </view>
 
-<block wx:if="{{searchData.releaseState == 1}}">
+<block wx:if="{{releaseState == 1}}">
   <button class="star">
     <image src="../../../images/courseDetailStar.png"/>
     <text>{{starNum}}</text>

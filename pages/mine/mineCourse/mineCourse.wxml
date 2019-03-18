@@ -31,5 +31,6 @@
         </view>
       </navigator>
     </view>
+    <view class="tips" wx:if="{{showTips}}">{{tips}}</view> 
   </scroll-view>
 </view>

@@ -53,15 +53,17 @@ Page({
 
   saveCourse(){
     let state = true;
-    if (!this.data.courseName) {
+    if (!this.data.courseName || getLength(this.data.courseName) > 20) {
       this.setData({
-        courseNameType: 'error'
+        courseNameType: 'error',
+        courseName: ''
       });
       state = false;
     }
     if (!this.data.article) {
       this.setData({
-        articleType: 'error'
+        articleType: 'error',
+        article:''
       });
       state = false;
     }
@@ -89,13 +91,15 @@ Page({
     let state = true;
     if (!this.data.courseName) {
       this.setData({
-        courseNameType: 'error'
+        courseNameType: 'error',
+        courseName:''
       });
       state = false;
     }
     if (!this.data.article) {
       this.setData({
-        articleType: 'error'
+        articleType: 'error',
+        article:''
       });
       state = false;
     }

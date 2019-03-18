@@ -11,8 +11,10 @@ Page({
     pageIndex: 1, //默认显示第一页
     pageSize: 5, //默认每页20条数据
     sortWay: 1, // 1 按点赞数降序 2 按时间降序
+
     loadingComplete: false, // 全部加载完成
-    isLoading: false,
+    showTips: true,
+    tips: '正在加载内容……',
 
     //导航数据
     navData: [{
@@ -63,6 +65,9 @@ Page({
     };
     this.setData({
       courseList: [],
+      showTips: true,
+      tips: '正在加载内容……',
+      loadingComplete:false,
       ...data
     },()=>{
       this.getCourseData({
@@ -72,6 +77,7 @@ Page({
           this.setData({
             courseList,
             pageIndex: ++this.data.pageIndex,
+            showTips: false
           })
         }
       });
@@ -82,48 +88,54 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    if (app.globalData.isLogin){
-      this.getCourseData({
-        pageIndex: this.data.pageIndex,
-        pageSize: this.data.pageSize,
-        sortWay: this.data.sortWay,
-        callBack: (courseList) => {
-          this.setData({
-            courseList,
-            pageIndex: ++this.data.pageIndex,
-          })
-        }
-      });
-    }
+    this.getCourseData({
+      pageIndex: this.data.pageIndex,
+      pageSize: this.data.pageSize,
+      sortWay: this.data.sortWay,
+      callBack: (courseList) => {
+        this.setData({
+          courseList,
+          pageIndex: ++this.data.pageIndex,
+          showTips: false
+        })
+      }
+    });
   },
 
   //页面画到底部加载更
   searchScrollLower() {
     //已经加载完全部课程
-    if (this.data.loadingComplete) return;
-    this.setData({
-      isLoading: true
-    });
-    this.getCourseData({
-      pageIndex: this.data.pageIndex,
-      pageSize: this.data.pageSize,
-      sortWay: this.data.sortWay,
-      callBack: (courseList,totalNum) => {
-        const newCourseList = this.data.courseList.concat(courseList);
-        this.setData({
-          isLoading: false,
-          courseList: newCourseList,
-          pageIndex: ++this.data.pageIndex,
-          loadingComplete: totalNum == newCourseList.length
-        });
-      }
-    });
+    if (this.data.loadingComplete){
+      this.setData({
+        showTips: true,
+        tips: '已经到底了……'
+      });
+    }else{
+      this.setData({
+        showTips: true,
+        tips: '正在加载更多内容……'
+      });
+      this.getCourseData({
+        pageIndex: this.data.pageIndex,
+        pageSize: this.data.pageSize,
+        sortWay: this.data.sortWay,
+        callBack: (courseList, totalNum) => {
+          const newCourseList = this.data.courseList.concat(courseList);
+          this.setData({
+            showTips: false,
+            courseList: newCourseList,
+            pageIndex: ++this.data.pageIndex,
+            loadingComplete: totalNum == newCourseList.length
+          });
+        }
+      });
+    }
   },
 
   //请求课程数据
   getCourseData(opts){
-    ajax({
-      url: '/GetCourseList',
+    wx.request({
+      url: app.globalData.server+'/GetCourseList',
       method: 'get',
       data: {
         pageIndex: opts.pageIndex,

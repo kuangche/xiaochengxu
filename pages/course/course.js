@@ -1,5 +1,5 @@
 //获取应用实例
-const app = getApp()
+const app = getApp();
 import { ajax, getLength, cutstr} from '../../utils/util.js'
 Page({
 
@@ -8,7 +8,6 @@ Page({
    */
   data: {
     courseList: [], //数据列表
-
     pageIndex: 1, //默认显示第一页
     pageSize: 5, //默认每页20条数据
     sortWay: 1, // 1 按点赞数降序 2 按时间降序
@@ -58,43 +57,81 @@ Page({
 
   //切换tab 点赞数、时间
   tabChange(e) {
-    this.setData({
+    const data = {
+      pageIndex: 1,
       sortWay: e.currentTarget.dataset.sortWay,
-      pageIndex: 1,
-      pageSize: this.data.pageSize,
-    });
-
-    //请求课程数据
-    this.getCourseData({
-      pageIndex: 1,
-      pageSize: this.data.pageSize,
-      sortWay: this.data.sortWay
+    };
+    this.setData({
+      courseList: [],
+      ...data
+    },()=>{
+      this.getCourseData({
+        ...data,
+        pageSize: this.data.pageSize,
+        callBack: (courseList) => {
+          this.setData({
+            courseList,
+            pageIndex: ++this.data.pageIndex,
+          })
+        }
+      });
     });
   },
 
+  /**
+   * 生命周期函数--监听页面加载
+   */
   onLoad() {
-    if(getApp().globalData.isLogin){
+    if (app.globalData.isLogin){
       this.getCourseData({
-        pageIndex: 1,
+        pageIndex: this.data.pageIndex,
         pageSize: this.data.pageSize,
-        sortWay: this.data.sortWay
+        sortWay: this.data.sortWay,
+        callBack: (courseList) => {
+          this.setData({
+            courseList,
+            pageIndex: ++this.data.pageIndex,
+          })
+        }
       });
     }
   },
-  
+
+  //页面画到底部加载更
+  searchScrollLower() {
+    //已经加载完全部课程
+    if (this.data.loadingComplete) return;
+    this.setData({
+      isLoading: true
+    });
+    this.getCourseData({
+      pageIndex: this.data.pageIndex,
+      pageSize: this.data.pageSize,
+      sortWay: this.data.sortWay,
+      callBack: (courseList,totalNum) => {
+        const newCourseList = this.data.courseList.concat(courseList);
+        this.setData({
+          isLoading: false,
+          courseList: newCourseList,
+          pageIndex: ++this.data.pageIndex,
+          loadingComplete: totalNum == newCourseList.length
+        });
+      }
+    });
+  },
+
+  //请求课程数据
   getCourseData(opts){
-    wx.request({
-      url: 'https://api.vroec.com/api/cdsp/GetCourseList',
+    ajax({
+      url: '/GetCourseList',
       method: 'get',
       data: {
-        ...opts
+        pageIndex: opts.pageIndex,
+        pageSize: opts.pageSize,
+        sortWay: opts.sortWay
       },
       success: (data) => {
-        const courseStrLeng = getApp().globalData.courseStrLeng;
-        this.setData({
-          courseList: null
-        });
-
+        const courseStrLeng = app.globalData.courseStrLeng;
         const TotalNum = data.data.TotalNum;
         const courseList = data.data.Datas;
         courseList.forEach((item,index) =>{
@@ -102,41 +139,9 @@ Page({
             item.course_summary = cutstr(item.course_summary, courseStrLeng)
           }
         });
-        setTimeout(()=>{
-          this.setData({
-            pageIndex: ++this.data.pageIndex,
-            courseList: courseList,
-            loadingComplete: TotalNum == courseList.length
-          });
-        })
-      }
-    })
-  },
-
-  //页面滑动到底部触发该事件
-  searchScrollLower(){
-    //已经加载完全部课程
-    if(this.data.loadingComplete)return;
-    this.setData({
-      isLoading: true
-    })
-    wx.request({
-      url: 'https://api.vroec.com/api/cdsp/GetCourseList',
-      method: 'get',
-      data:{
-        pageIndex: this.data.pageIndex,
-        pageSize: this.data.pageSize,
-        sortWay: this.data.sortWay
-      },
-      success: (data) => {
-        const TotalNum = data.data.TotalNum;
-        const courseList = this.data.courseList.concat(data.data.Datas);
-        this.setData({
-          pageIndex: ++this.data.pageIndex,
-          courseList: courseList,
-          loadingComplete: TotalNum == courseList.length,
-          isLoading:false
-        });
+        if (opts.callBack && Object.prototype.toString.call(opts.callBack) === '[object Function]') {
+          opts.callBack(courseList, TotalNum);
+        }
       }
     })
   }

@@ -1,3 +1,5 @@
+const app = getApp();
+import { ajax, getLength, cutstr } from '../../../utils/util.js';
 Page({
 
   /**
@@ -20,7 +22,7 @@ Page({
   },
 
   publish(){
-    wx.request({
+    ajax({
       url: 'https://api.vroec.com/api/cdsp/ReleaseCourse',
       method: 'get',
       data: {

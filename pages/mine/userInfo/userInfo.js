@@ -1,3 +1,4 @@
+const app = getApp()
 Page({
 
   /**
@@ -75,7 +76,7 @@ Page({
 
   //保存用户信息
   saveUserInfo(){
-    const globalData = getApp().globalData;
+    const globalData = app.globalData;
     const baseInfo = globalData.baseInfo;
     const userInfo = globalData.userInfo;
     const openID = globalData.openID;
@@ -103,8 +104,8 @@ Page({
         this.setData({
           showModal: true
         })
-        getApp().globalData.isLogin = true;
-        getApp().globalData.userInfo.user_id = data.data;
+        app.globalData.isLogin = true;
+        app.globalData.userInfo.user_id = data.data;
       }
     })
   },
@@ -112,17 +113,17 @@ Page({
   //获取手机号码
   getPhoneNumber(e) {
     const dataDetail = e.detail;
-    if (!getApp().globalData.getPhoneBtn && dataDetail)return;
+    if (!app.globalData.getPhoneBtn && dataDetail)return;
     wx.request({
       url: 'https://api.vroec.com/api/cdsp/GetPhoneNumber',
       method: 'get',
       data:{
-        sessionKey: getApp().globalData.sessionKey,
+        sessionKey: app.globalData.sessionKey,
         iv: dataDetail.iv,
         encryptedData: dataDetail.encryptedData
       },
       success: (data)=>{
-        getApp().globalData.getPhoneBtn = false;
+        app.globalData.getPhoneBtn = false;
         const purePhoneNumber = data.data.purePhoneNumber;
         if (/^[1][3,8]\d{9}/.test(purePhoneNumber)){
           this.setData({
@@ -156,11 +157,11 @@ Page({
    */
   onLoad(opts) {
     this.setData({
-      getPhoneBtn: getApp().globalData.getPhoneBtn,
+      getPhoneBtn: app.globalData.getPhoneBtn,
     });
     //如果从个人中心页面进来，则需要获取前一页的数据，把相关内容回显到此页面当中；
     if (opts.editor && opts.editor == 1){
-      const userInfo = getApp().globalData.userInfo; //取上页data里的数据也可以修
+      const userInfo = app.globalData.userInfo; //取上页data里的数据也可以修
       this.setData({
         userNameType: true,
         phoneType: true,

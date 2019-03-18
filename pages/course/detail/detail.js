@@ -1,3 +1,7 @@
+//获取应用实例
+const app = getApp();
+import { ajax, getLength, cutstr } from '../../../utils/util.js'
+//此页ajax不做登陆校验处理，保证分享后的文章，保证用户不用登陆也可以查看
 Page({
 
   /**
@@ -16,11 +20,12 @@ Page({
     starNum: '',
     time: '',
     school: '',
-    userName: ''
+    userName: '',
+    startData: []
   },
 
   //转发
-  onShareAppMessage: function (res) {
+  onShareAppMessage(res){
     if(res.from == 'button'){
       //TODO
     }
@@ -30,7 +35,7 @@ Page({
     }
   },
 
-  getCourseDetail: function (opts){
+  getCourseDetail(opts){
     wx.request({
       url: 'https://api.vroec.com/api/cdsp/GetCourseByID',
       method: 'get',
@@ -41,7 +46,7 @@ Page({
         const courseDetail = data.data;
         this.setData({
           courseID: courseDetail.course_id,
-          userID: getApp().globalData.userInfo.user_id,
+          userID: app.globalData.userInfo.user_id,
           title: courseDetail.course_title,
           html: courseDetail.course_summary,
           starNum: courseDetail.course_praise_num,
@@ -51,8 +56,23 @@ Page({
     })
   },
 
+  getStarData(opts){
+    wx.request({
+      url: 'https://api.vroec.com/api/cdsp/GetPraiseDetailByCourseID',
+      method: 'get',
+      data: {
+        courseID: opts.courseID
+      },
+      success: (data) => {
+        this.setData({
+          starData: data.data
+        })
+      }
+    })
+  },
+
   //点赞
-  starAdd: function(opts = {}){
+  starAdd(opts = {}){
     if (this.data.starDisabled)return;
     //设置数据
     wx.request({
@@ -112,6 +132,9 @@ Page({
     })
     //获取详细信息
     this.getCourseDetail({
+      courseID: opts.courseID
+    });
+    this.getStarData({
       courseID: opts.courseID
     })
   }

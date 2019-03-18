@@ -24,6 +24,26 @@ page {
 .courseDetail .article {
   font-size: 26rpx;
   color: #999;
+  margin-bottom: 40rpx;
+}
+.starList{
+  width:100%;
+  height: auto;
+  max-height:224px;
+  background:rgba(246,246,246,1);
+  opacity:1;
+  border-radius:12px;
+  overflow: auto;
+  padding: 20rpx 30rpx;
+}
+.starList>view{
+  margin-bottom: 10rpx;
+  display: flex;
+}
+.starList>view text{
+  display: inline-block;
+  flex: 1;
+  text-align: left;
 }
 
 .star {

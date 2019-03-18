@@ -16,7 +16,9 @@ const formatNumber = n => {
 
 
 function ajax(options){
-  var isLogin = getApp().globalData.isLogin;//登录过后，用户信息会缓存
+  const app = getApp();
+  const isLogin = app.globalData.isLogin;//登录过后，用户信息会缓存
+  const server = app.globalData.server
   if (!isLogin) {
     wx.redirectTo({
       url: '/pages/login/login'
@@ -24,7 +26,7 @@ function ajax(options){
   } else {
     wx.request({
       ...options,
-      url: getApp().globalData.server + options.url
+      url: server + options.url
     })
   }
 }

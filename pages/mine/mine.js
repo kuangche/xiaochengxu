@@ -1,4 +1,5 @@
 const app = getApp();
+import { ajax, getLength, cutstr } from '../../utils/util.js'
 Page({
 
   /**
@@ -48,20 +49,21 @@ Page({
   },
 
   onShow(options) {
-    wx.request({
-      url:'https://api.vroec.com/api/cdsp/GetUserByID',
+    ajax({
+      url:'/GetUserByID',
       method: 'get',
       data: {
-        userID: getApp().globalData.userInfo.user_id
+        userID: app.globalData.userInfo.user_id
       },
       success: (data)=>{
-        const newData = data.data;
+        const userInfoAboutCourse = data.data;
         this.setData({
-          userInfo : data.data
+          userInfo: userInfoAboutCourse
         })
-        getApp().globalData.userInfo = {
-          ...getApp().globalData.userInfo,
-          ...data.data
+        //合并用户信息
+        app.globalData.userInfo = {
+          ...app.globalData.userInfo,
+          ...userInfoAboutCourse
         }
       }
     })

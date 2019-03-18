@@ -1,6 +1,6 @@
 //获取应用实例
 const app = getApp()
-
+import { ajax, getLength, cutstr } from '../../utils/util.js'
 Page({
 
   /**
@@ -66,12 +66,12 @@ Page({
       state = false;
     }
     if (!state) return;
-    wx.request({
-      url: 'https://api.vroec.com/api/cdsp/SaveCourse',
+    ajax({
+      url: '/SaveCourse',
       method: 'post',
       data:{
         course_id: this.data.searchData.courseID || 0,
-        user_id: getApp().globalData.userInfo.user_id,
+        user_id: app.globalData.userInfo.user_id,
         course_title: this.data.courseName,
         course_summary: this.data.article,
         course_is_release: 0 //是否发布（0，未发布 1，已发布） 如果是直接发布就给1
@@ -100,12 +100,12 @@ Page({
       state = false;
     }
     if(!state)return;
-    wx.request({
-      url: 'https://api.vroec.com/api/cdsp/SaveCourse',
+    ajax({
+      url: '/SaveCourse',
       method: 'post',
       data: {
         course_id: this.data.searchData.courseID || 0,
-        user_id: getApp().globalData.userInfo.user_id,
+        user_id: app.globalData.userInfo.user_id,
         course_title: this.data.courseName,
         course_summary: this.data.article,
         course_is_release: 1 //是否发布（0，未发布 1，已发布） 如果是直接发布就给1
@@ -146,8 +146,8 @@ Page({
   },
 
   getCourseDetail: function (courseID) {
-    wx.request({
-      url: 'https://api.vroec.com/api/cdsp/GetCourseByID',
+    ajax({
+      url: '/GetCourseByID',
       method: 'get',
       data:{
         courseID

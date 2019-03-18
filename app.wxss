@@ -243,6 +243,7 @@ page {
   font-size: 26rpx;
   color: #999;
   margin-bottom: 24rpx;
+  word-wrap:break-word;
 }
 
 .courseList .list .info {

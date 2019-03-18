@@ -10,6 +10,14 @@
   <view class="article">
     <rich-text nodes="{{html}}"></rich-text>
   </view>
+
+  <view class='starList' wx:if="{{showStar==1}}">
+    <view wx:for="{{starData}}"  wx:key="item.user_id">
+      <text>{{item.praise_time}}</text>
+      <text>{{item.user_true_name}}</text>
+      <text>点赞 +1</text>
+    </view>
+  </view>
 </view>
 
 <button class="star {{starDisabled? 'disabled': ''}}" bindtap="starAdd">

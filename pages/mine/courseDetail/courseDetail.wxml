@@ -11,7 +11,7 @@
     <rich-text nodes="{{html}}"></rich-text>
   </view>
 
-  <view class='starList' wx:if="{{releaseState == 1}}">
+  <view class='starList' wx:if="{{starData.length > 0 && releaseState == 1}}">
     <view wx:for="{{starData}}"  wx:key="item.user_id">
       <text>{{item.praise_date}}</text>
       <text>{{item.praise_time}}</text>

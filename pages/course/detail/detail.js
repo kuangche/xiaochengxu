@@ -78,10 +78,10 @@ Page({
             showModal: true,
             messageTitle: '点赞成功',
             messageType: 'chenggong',
-            starNum: data.data,
+            starNum: ++this.data.starNum,
             starDisabled: true
           }, () => {
-            this.modifyStarNum(data.data)
+            this.modifyStarNum(this.data.starNum)
           });
         } else if (data.data == 2) {
           this.setData({

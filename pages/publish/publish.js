@@ -16,7 +16,9 @@ Page({
     courseNameType: '',
     nameFocus: '',
     articleFocus: '',
-    toViewUrl: ''
+    toViewUrl: '',
+    articleLength:500,
+    titleLength: 20
   },
 
   nameBlur(){
@@ -53,7 +55,7 @@ Page({
 
   saveCourse(){
     let state = true;
-    if (!this.data.courseName || getLength(this.data.courseName) > 20) {
+    if (!this.data.courseName || getLength(this.data.courseName) > this.data.titleLength) {
       this.setData({
         courseNameType: 'error',
         courseName: ''

@@ -2,11 +2,11 @@
 <view class="publishCon">
   <form>
     <view class="section">
-      <input class="{{nameFocus}}" bindfocus='nameFocus' bindblur='nameBlur' name="courseName" value='{{courseName}}' placeholder="请输入课程名称" placeholder-class='{{courseNameType}}' bindinput='nameBlue' />
+      <input class="{{nameFocus}}" maxlength='{{titleLength}}' bindfocus='nameFocus' bindblur='nameBlur' name="courseName" value='{{courseName}}' placeholder="请输入课程名称，最多不能超过{{titleLength}}个字" placeholder-class='{{courseNameType}}' bindinput='nameBlue' />
     </view>
     <view class="section">
       <view wx:if="{{showModal}}" class="replaceCon">{{article}}</view>
-      <textarea wx:else name="article" maxlength="500" class="{{articleFocus}}" bindfocus='articleFocus' bindblur='articleBlur' value='{{article}}' placeholder="请输入课程描述" placeholder-class='{{articleType}}' bindinput='articleBlue' />
+      <textarea wx:else name="article" maxlength="{{articleLength}}" class="{{articleFocus}}" bindfocus='articleFocus' bindblur='articleBlur' value='{{article}}' placeholder="请输入课程描述，最多不能超过{{articleLength}}个字" placeholder-class='{{articleType}}' bindinput='articleBlue' />
     </view>
   </form>
 

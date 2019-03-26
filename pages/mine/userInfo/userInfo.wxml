@@ -6,7 +6,7 @@
   <form bindsubmit="formSubmit">
     <view class="section">
       <view class="section__title">姓名</view>
-      <input type="text" name="userName" value='{{userName}}' placeholder="请输入您的名字" placeholder-class="{{userNameType || 'error'}}"/>
+      <input type="text" name="userName" maxlength="20" value='{{userName}}' placeholder="请输入您的名字" placeholder-class="{{userNameType || 'error'}}"/>
     </view>
     <view class="section">
       <view class="section__title">电话</view>
@@ -15,11 +15,11 @@
     </view>
     <view class="section">
       <view class="section__title">学校</view>
-      <input type="text" name="school" value='{{school}}' placeholder="请输入您的所在院校" placeholder-class="{{schoolType || 'error'}}"/>
+      <input type="text" name="school" maxlength="20" value='{{school}}' placeholder="请输入您的所在院校" placeholder-class="{{schoolType || 'error'}}"/>
     </view>
     <view class="section">
       <view class="section__title">所需院系</view>
-      <input type="text" name="college" value='{{college}}' placeholder="请输入您的所在院系" placeholder-class="{{collegeType || 'error'}}"/>
+      <input type="text" name="college" maxlength="20" value='{{college}}' placeholder="请输入您的所在院系" placeholder-class="{{collegeType || 'error'}}"/>
     </view>
     <view class="operate">
       <button class="btn_full" formType="submit">保存</button>

@@ -30,11 +30,20 @@ Page({
         pageIndex: this.data.pageIndex,
         pageSize: this.data.pageSize,
         callBack: (courseList) => {
-          this.setData({
-            courseList,
-            pageIndex: ++this.data.pageIndex,
-            showTips: false
-          })
+          if (courseList.length == 0) {
+            this.setData({
+              courseList,
+              pageIndex: 1,
+              showTips: true,
+              tips: '暂无内容……'
+            })
+          } else {
+            this.setData({
+              courseList,
+              pageIndex: ++this.data.pageIndex,
+              showTips: false
+            })
+          }
         }
       });
     })
